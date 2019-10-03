@@ -1,0 +1,204 @@
+:root {
+  --colorMain: #ff5485;
+  --colorText: #404040;
+  --colorLight: #f4f4f4;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  touch-action: none;
+  margin: 0;
+  padding: 0;
+  color: var(--colorText);
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+.button-action {
+  border: 0;
+  color: white;
+  background-color: var(--colorText);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+}
+
+.button-action:disabled {
+  opacity: 0.5;
+}
+
+.header {
+  border-bottom: 0.1875em solid var(--colorLight);
+  margin-bottom: 2em;
+  padding: 0 1em;
+  height: 3.75em;
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  margin-left: 2em;
+  flex: 1;
+}
+
+.header-logo {
+  width: 6.625em;
+  fill: var(--colorText);
+}
+.State-loading .header-logo {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    fill: var(--colorText);
+  }
+  100% {
+    fill: var(--colorMain);
+  }
+}
+
+.header_log-in,
+.header_log-out {
+  font-size: 1em;
+  color: var(--colorText);
+  height: 100%;
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+.State-loading .header_log-in,
+.State-loading .header_log-out {
+  display: none;
+}
+.header_log-in,
+.logged-in .header_log-out {
+  display: inline;
+}
+.logged-in .header_log-in,
+.header_log-out {
+  display: none;
+}
+
+.header_log-in:hover,
+.header_log-in:focus,
+.header_log-out:hover,
+.header_log-out:focus {
+  color: var(--colorMain);
+}
+
+.header_log-in:hover:after,
+.header_log-in:focus:after,
+.header_log-out:hover:after,
+.header_log-out:focus:after {
+  content: "";
+  position: absolute;
+  height: 0.1875em;
+  width: 100%;
+  background-color: var(--colorMain);
+  left: 0;
+  bottom: -0.1875em;
+}
+
+main {
+  padding: 0 1em;
+}
+
+/* ---
+borrow-form
+--- */
+.borrow-form {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 70em;
+}
+.borrow-form_label {
+  flex: 2;
+}
+.borrow-form_label:focus-within {
+  color: var(--colorMain);
+}
+.borrow-form_labelLarge {
+  flex: 3;
+}
+.borrow-form_labelSmall {
+  flex: 1;
+}
+.borrow-form_label-input,
+.borrow-form_label-text {
+  font-size: 1em;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
+.borrow-form_label-input {
+  border: none;
+  border-bottom: 0.1875em solid var(--colorText);
+}
+.borrow-form_label-text {
+  font-size: 0.75em;
+}
+.borrow-form_label-input:focus {
+  border-bottom: 0.1875em solid var(--colorMain);
+}
+
+/* ---
+borrowed-list
+--- */
+.loans {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+  width: 70em;
+  border-collapse: collapse;
+}
+.loans-header {
+  text-align: left;
+  background-color: var(--colorText);
+  color: var(--colorLight);
+}
+
+/* ---
+loan
+--- */
+.loans-header th,
+.loan td {
+  padding: 0.25em;
+}
+.loan:nth-child(even) {
+  background-color: var(--colorLight);
+}
+.loan:hover,
+.loan:focus-within {
+  background-color: var(--colorMain);
+}
+.loan_loanDate {
+  width: 6em;
+}
+.loan_object {
+  width: 14em;
+}
+.loan_amount {
+  width: 3em;
+}
+.loan_responsible {
+  width: 4em;
+}
+.loan_returnDate {
+  width: 6em;
+}
+.loan_returnDate button {
+  width: 100%;
+}
