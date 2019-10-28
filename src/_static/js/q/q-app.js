@@ -13,7 +13,11 @@ const subs = [
 
 const queueConfig = {
   listSelector: ".TicketQueue",
-  ticketSelector: ".TicketRoll-number"
+  ticketSelector: ".TicketRoll-number",
+  onclick: ticketId => {
+    console.log(ticketId);
+    db.set("tickets", { handled: true }, ticketId, true);
+  }
 };
 const loginConfig = {
   containerSelector: ".Modal-container",
@@ -259,7 +263,10 @@ function setAppStateClasses(appState, currentUser, queue) {
   document.body.classList.toggle("State-booting", !appState.isLoaded());
 
   if (currentUser) {
-    document.body.classList.toggle("State-admin", currentUser.role === "admin");
+    document.body.classList.toggle(
+      "State-admin",
+      currentUser.role && currentUser.role.admin
+    );
 
     const tickets = queue.sortTicketStore(appState.get("tickets"));
     const hasTicket = userTickets(currentUser, tickets).length > 0;

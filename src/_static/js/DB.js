@@ -51,12 +51,17 @@ class DB {
         });
     }
   }
-  set(collection, data, document) {
+  set(collection, data, document, merge) {
+    console.log(collection, data, document, merge);
     if (document) {
+      let options = {};
+      if (merge) {
+        options.merge = true;
+      }
       this.db
         .collection(collection)
         .doc(document)
-        .set(data)
+        .set(data, options)
         .then(function() {})
         .catch(function(error) {
           return error;

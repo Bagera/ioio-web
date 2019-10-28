@@ -37,3 +37,6 @@
 .TicketQueue-user {
   flex: 1;
 }
+.TicketQueue-resolve {
+  flex: 1;
+}

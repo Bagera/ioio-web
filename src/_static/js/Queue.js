@@ -2,6 +2,19 @@ class Queue {
   constructor(props) {
     this.queueElement = document.querySelector(props.listSelector + " ol");
     this.ticketElement = document.querySelector(props.ticketSelector);
+    this.handleClick = props.onclick;
+    this.queueElement.onclick = ev => {
+      this.handleResolve(ev);
+    };
+  }
+  handleResolve(ev) {
+    let target = ev.target;
+    if (target && target.classList.contains("TicketQueue-resolve")) {
+      const ticketId = target.parentNode.dataset.ticket;
+      if (this.handleClick) {
+        this.handleClick(ticketId);
+      }
+    }
   }
   listen(document, callback) {
     firebase
@@ -44,9 +57,10 @@ class Queue {
     if (currentUser && currentUser.uid === ticket.uid) {
       ticketClass += " TicketQueue-ownedTicket";
     }
-    return `<li class=${ticketClass}>
+    return `<li class=${ticketClass} data-ticket="${ticket.id}" >
         <span class="TicketQueue-user">${user.first_name} ${user.last_name}</span>
         <span class="TicketQueue-location">${ticket.location}</span>
+        <button class="Button TicketQueue-resolve">handled</button>
       </li>`;
   }
 
