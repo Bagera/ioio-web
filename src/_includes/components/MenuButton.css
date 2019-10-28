@@ -1,0 +1,56 @@
+.MenuButton {
+  font-size: 1em;
+  width: 3em;
+  height: 3em;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0.5em;
+  left: calc(50% - 1.5em);
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+}
+.MenuButton:active {
+  transform: scale(0.9);
+}
+.MenuButton-text {
+  display: none;
+}
+.MenuButton-icon {
+  position: absolute;
+  height: 0.25em;
+  width: 1.5em;
+}
+.MenuButton-line {
+  position: absolute;
+  background-color: var(--color-text);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition: opacity 0.25s linear, transform 0.5s;
+}
+.MenuButton-line:first-child {
+  transform: translateY(-0.5em);
+}
+.MenuButton-line:last-child {
+  transform: translateY(0.5em);
+}
+
+.State-showMenu .MenuButton-line {
+  opacity: 0;
+}
+
+.State-showMenu .MenuButton-line:first-child {
+  opacity: 1;
+  transform: translateY(0) rotateZ(135deg);
+}
+.State-showMenu .MenuButton-line:last-child {
+  opacity: 1;
+  transform: translateY(0) rotateZ(45deg);
+}

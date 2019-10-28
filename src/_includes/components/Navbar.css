@@ -1,0 +1,106 @@
+/* NAVBAR */
+.Navbar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 1em 1em 4em;
+  background-color: var(--color-bg);
+  z-index: 10;
+  font-size: 1.5em;
+  transform: translateX(-100%);
+  transition: transform 0.25s;
+}
+.State-showMenu .Navbar {
+  transform: translateX(0);
+}
+
+.Navbar-brand {
+  display: block;
+  fill: var(--color-text);
+  color: var(--color-text);
+  text-decoration: none;
+  margin-bottom: 4em;
+}
+.Navbar-logo {
+  display: block;
+  line-height: 1;
+  padding: 0.5rem;
+  background-color: var(--color-light);
+}
+.Navbar-brand .ioio-logo {
+  display: block;
+  height: 3rem;
+  margin: auto;
+}
+.ioio-logo-outline {
+  fill: inherit;
+}
+.ioio-logo-characters {
+  fill: var(--color-bg);
+}
+.State-booting .Navbar-brand,
+.State-loggingIn .Navbar-brand,
+.State-loading .Navbar-brand {
+  animation: pulse 0.5s infinite alternate;
+}
+
+.Navbar-pageMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Navbar-pageMenuItem {
+  margin-bottom: 0.5em;
+}
+.Navbar-link {
+  color: var(--color-text);
+  text-decoration: none;
+}
+.Navbar-link:hover,
+.Navbar-link:focus {
+  color: var(--color-main);
+}
+
+.Navbar-userMenu {
+  margin-top: 4em;
+}
+.Navbar-button {
+  font-family: inherit;
+  font-size: 1em;
+  color: var(--color-text);
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  font-weight: inherit;
+}
+.Navbar-button:hover,
+.Navbar-button:focus {
+  color: var(--color-main);
+}
+.State-booting .Navbar-registration,
+.State-booting .Navbar-login,
+.State-booting .Navbar-logout {
+  display: none;
+}
+.State-loggedIn .Navbar-registration,
+.State-loggedIn .Navbar-login,
+.State-loggedOut .Navbar-logout {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .Navbar {
+    position: relative;
+    padding: 0 0 1em;
+    transform: none;
+    width: auto;
+  }
+  .Navbar-pageMenu {
+    flex: 1;
+  }
+}

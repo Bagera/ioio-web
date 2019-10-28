@@ -1,0 +1,13 @@
+<button class="MenuButton">
+  <span class="MenuButton-icon">
+    <span class="MenuButton-line"></span>
+    <span class="MenuButton-line"></span>
+    <span class="MenuButton-line"></span>
+  </span>
+  <span class="MenuButton-text">Toggle menu</span>
+</button>
+<script>
+  document.querySelector(".MenuButton").onclick = () => {
+    document.body.classList.toggle("State-showMenu");
+  };
+</script>

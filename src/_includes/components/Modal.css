@@ -1,0 +1,106 @@
+.Modal-bg {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+.State-modalOpen main,
+.State-modalOpen .Navbar,
+.State-modalOpen .Footer {
+  filter: blur(5px);
+}
+
+.Modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 20em;
+  min-height: 20em;
+  max-height: 90%;
+  background-color: var(--color-bg);
+  padding: 2.25em 1em 1em;
+  border-radius: 1em;
+  overflow: auto;
+}
+
+.Modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1;
+}
+.Modal-formBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.Modal-form label {
+  display: block;
+  width: 100%;
+  border: none;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.Modal-form input[type="text"],
+.Modal-form input[type="email"],
+.Modal-form input[type="password"] {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: solid 0.125em var(--color-text);
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+.Modal-form input:focus {
+  border-color: var(--color-main);
+}
+
+.Modal-button {
+  border: none;
+  font-size: 1em;
+  background-color: var(--color-text);
+  color: var(--color-light);
+  line-height: 2;
+  border-radius: 0.5em;
+  padding: 0 1em;
+  transition: transform 0.125s;
+}
+.Modal-button:hover,
+.Modal-button:focus {
+  background-color: var(--color-main);
+}
+.Modal-button:active {
+  transform: scale(0.95);
+}
+
+.Modal-closeButton {
+  position: absolute;
+  top: 0.25em;
+  right: 0.25em;
+}
+
+.Modal-resetEmail {
+  background-color: transparent;
+  text-decoration: underline;
+  color: var(--color-text);
+  padding: 0;
+  cursor: pointer;
+}
+.Modal-resetEmail:hover,
+.Modal-resetEmail:focus {
+  color: var(--color-main);
+  background-color: transparent;
+}

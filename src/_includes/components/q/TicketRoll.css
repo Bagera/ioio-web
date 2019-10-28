@@ -1,0 +1,102 @@
+.TicketRoll {
+  --color-ticket-roll: var(--color-mau);
+  position: relative;
+  height: 4em;
+  margin-bottom: 8em;
+  font-size: 16px;
+  background-color: var(--color-ticket-roll);
+  padding: 2em 1em;
+  text-align: center;
+  font-family: monospace;
+}
+.TicketRoll::before {
+  content: "";
+  position: absolute;
+  top: 1.75em;
+  left: calc(50% - 4.5em);
+  width: 9em;
+  height: 0.5em;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 1;
+  border-radius: 0.25em;
+}
+.TicketRoll::after {
+  content: "";
+  position: absolute;
+  top: 2em;
+  left: calc(50% - 4.5em);
+  width: 9em;
+  height: 0.125em;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  border-radius: 0.25em;
+}
+.TicketRoll-container {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  width: 8.5em;
+  overflow: hidden;
+  padding: 0 0.25em 0.25em;
+}
+.TicketRoll-ticket {
+  position: relative;
+  width: 8em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  border-bottom-right-radius: 4em;
+  border-bottom-left-radius: 4em;
+}
+.TicketRoll-ticket {
+  display: none;
+}
+.State-booting .TicketRoll-ticket,
+.State-loggingIn .TicketRoll-ticket,
+.State-loggedOut .TicketRoll-ticket,
+.State-hasTicket .TicketRoll-ticket {
+  transform: translateY(-100%);
+}
+.State-booting .TicketRoll-ticket,
+.State-loggingIn .TicketRoll-ticket,
+.State-loggedIn .TicketRoll-ticket,
+.State-loggedOut .TicketRoll-ticket {
+  transition: transform 0.5s;
+  display: block;
+}
+.TicketRoll-spacer {
+  width: 100%;
+  height: 0em;
+  background-color: whitesmoke;
+  transition: height 0.25s;
+}
+.TicketRoll-pulling .TicketRoll-spacer {
+  transition: none;
+}
+.TicketRoll-ticket:hover .TicketRoll-spacer {
+  height: 1em;
+}
+.TicketRoll-button {
+  display: block;
+  font-size: 1em;
+  width: 100%;
+  height: 8em;
+  padding: 0;
+  border: none;
+  border-bottom-right-radius: 4em;
+  border-bottom-left-radius: 4em;
+  background-color: whitesmoke;
+  z-index: 2;
+}
+.TicketRoll-number {
+  display: block;
+  text-align: center;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 3em;
+}
+.TicketRoll-numberPadding {
+  opacity: 0.5;
+}
+.TicketRoll-label {
+  display: block;
+  text-align: center;
+}

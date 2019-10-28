@@ -1,0 +1,48 @@
+.Page {
+}
+
+@media (min-width: 800px) {
+  .Page {
+    display: grid;
+    grid-template-columns: 13em minmax(40%, 960px);
+    grid-auto-rows: auto;
+  }
+  .Page-header {
+    grid-column-start: 1;
+    text-align: right;
+    font-weight: 700;
+    grid-row-end: span 3;
+  }
+  .Page-main {
+    grid-column-start: 2;
+  }
+  .Page-sidebar {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .Page-footer {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Page {
+    grid-template-columns: auto 13em minmax(40%, 960px) 13em auto;
+  }
+  .Page-header {
+    grid-column-start: 2;
+    grid-row-end: span 2;
+  }
+  .Page-main {
+    grid-column-start: 3;
+  }
+  .Page-sidebar {
+    grid-column-start: 4;
+    grid-row-end: span 2;
+  }
+  .Page-footer {
+    grid-column-start: 1;
+    grid-column-end: span 5;
+  }
+}

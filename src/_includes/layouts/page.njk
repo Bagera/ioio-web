@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+templateClass: Page
+---
+<header class="Page-header">
+{% include "components/Navbar.njk" %}
+</header>
+<main class="Page-main">
+  {{ content | safe }}
+</main>
+<aside class="Page-sidebar">
+</aside>
+<footer class="Page-footer">
+  {% include "components/Footer.njk" %}
+</footer>
+<script>
+  const firebaseConfig = {
+    {% for key, value in firebase %}
+      {{key}}: "{{value}}",
+    {% endfor %}
+  };
+</script>

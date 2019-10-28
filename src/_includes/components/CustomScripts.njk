@@ -1,0 +1,7 @@
+{% for script in customScripts %}
+  {% if script.path %}
+    <script defer src={{script.path}} type={{script.type}}></script>
+  {% else %}
+    <script defer src={{script}}></script>
+  {% endif %}
+{% endfor %}

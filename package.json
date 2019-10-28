@@ -1,18 +1,28 @@
 {
   "name": "ioio-web",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "ioio web site",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
+    "@11ty/eleventy-plugin-rss": "^1.0.7",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.1",
+    "luxon": "^1.12.0",
+    "markdown-it": "^8.4.2",
+    "markdown-it-anchor": "^5.0.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx eleventy",
+    "dev": "npx eleventy --serve",
+    "watch": "npx eleventy --watch",
+    "debug": "DEBUG=* npx eleventy"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com:Bagera/ioio-web.git"
   },
-  "author": "",
+  "author": "ioio TAs",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com:Bagera/ioio-web/issues"
