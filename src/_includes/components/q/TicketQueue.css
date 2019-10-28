@@ -16,7 +16,7 @@
   counter-reset: ticket-counter;
   max-width: 40em;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 1em;
 }
 .State-booting .TicketQueue-tickets {
   opacity: 0;
