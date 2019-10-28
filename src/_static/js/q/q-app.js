@@ -56,9 +56,7 @@ const resetConfig = {
     </form>
   `,
   onsubmit: function(formData) {
-    user.sendReset(formData.email, function() {
-      console.log("SENT");
-    });
+    user.sendReset(formData.email, function() {});
   }
 };
 const registrationConfig = {
@@ -197,7 +195,6 @@ subs.forEach(sub => {
       });
     }
     qState.set(dataType, data);
-    console.log(dataType);
     setAppStateClasses(qState, currentUser, queue);
   });
 });
