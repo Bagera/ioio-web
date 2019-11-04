@@ -28,6 +28,7 @@ function TicketRoll(ticketEl, tickets, user, db) {
   const ticketButton = ticketEl.querySelector(".TicketRoll-button");
   const spacer = ticketEl.querySelector(".TicketRoll-spacer");
   let touchStart = 0;
+  let touchTimer;
 
   // Click
   ticketButton.onclick = function() {
@@ -42,6 +43,8 @@ function TicketRoll(ticketEl, tickets, user, db) {
   };
   ticketEl.onpointermove = function(ev) {
     if (touchStart) {
+      clearTimeout(touchTimer);
+      touchTimer = null;
       ticketEl.classList.add("TicketRoll-pulling");
       const currY = getPageY(ev);
       const size = currY - touchStart;
@@ -59,11 +62,15 @@ function TicketRoll(ticketEl, tickets, user, db) {
       touchStart = endTouch(ticketEl, spacer);
     }
   };
-  // ticketEl.onpointerout = function() {
-  //   if (touchStart) {
-  //     touchStart = endTouch(ticketEl, spacer);
-  //   }
-  // };
+  ticketEl.onpointerout = function(ev) {
+    if (touchStart) {
+      if (!ev.target.parentNode.classList.contains("TicketRoll-ticket")) {
+        setTimeout(() => {
+          touchStart = endTouch(ticketEl, spacer);
+        }, 200);
+      }
+    }
+  };
 }
 
 export default TicketRoll;
