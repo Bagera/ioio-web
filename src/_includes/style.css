@@ -42,6 +42,35 @@ body {
   opacity: 0.5;
 }
 
+.Button {
+  border: none;
+  font-size: 1em;
+  background-color: var(--color-text);
+  color: var(--color-light);
+  line-height: 1;
+  border-radius: 0.25em;
+  padding: 0.375em 0.875em;
+  border: solid 0.125em transparent;
+  transition: transform 0.125s;
+}
+.Button:hover {
+  background-color: var(--color-main);
+}
+.Button:focus {
+  border-color: var(--color-main);
+  outline: none;
+}
+.Button::-moz-focus-inner {
+  border: 0;
+}
+.Button:active {
+  transform: scale(0.95);
+}
+.Button:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-medium);
+}
+
 /* ---
 borrow-form
 --- */
@@ -144,5 +173,19 @@ loan
   100% {
     color: var(--color-main);
     fill: var(--color-main);
+  }
+}
+
+/* ANIMATION */
+@keyframes fadePopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
   }
 }

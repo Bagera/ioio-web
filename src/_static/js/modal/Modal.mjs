@@ -6,14 +6,11 @@ function parseValue(value) {
 }
 
 class Modal {
-  constructor(props) {
-    this.container = document.querySelector(props.containerSelector);
-    this.template = props.template;
-    this.onopen = props.onopen;
-    this.onsubmit = props.onsubmit;
+  constructor() {
+    this.container = document.querySelector(".Modal-container");
   }
   open() {
-    this.render(this.template);
+    this.render(this.template || this.renderForm());
     document.body.classList.add("State-modalOpen");
     if (this.onopen) {
       this.onopen();
@@ -51,11 +48,18 @@ class Modal {
       this.close();
       ev.preventDefault();
     };
-    document.querySelector(".Modal-bg").onclick = ev => {
+    const modalBg = document.querySelector(".Modal-bg");
+    modalBg.onclick = ev => {
       if (!ev.target.closest(".Modal")) {
         this.close();
       }
     };
+    modalBg.onkeydown = ev => {
+      if (ev.key === "Escape") {
+        this.close();
+      }
+    };
+
     const form = document.querySelector(".Modal form");
     if (form) {
       document.querySelector(".Modal input").focus();

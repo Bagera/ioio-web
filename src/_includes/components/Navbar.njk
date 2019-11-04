@@ -1,6 +1,6 @@
 <div class="Navbar">
 
-  <a class="Navbar-brand" href="/">
+  <a class="Navbar-brand" href="/" aria-label="Home">
     <span class="Navbar-logo">
     {% include "images/ioio-logo.svg" %}
     </span>
@@ -12,9 +12,6 @@
     <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="/q">Q</a></li>
   </ul>
 
-  <div class="Navbar-userMenu">
-    <button class="Navbar-button Navbar-registration">register</button>
-    <button class="Navbar-button Navbar-login">log in</button>
-    <button class="Navbar-button Navbar-logout">log out</button>
-  </div>
+  {% include "components/UserMenu.njk" %}
+  
 </div>

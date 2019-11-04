@@ -1,7 +1,18 @@
+function snapshotToMap(snapshot) {
+  let data = new Map();
+  snapshot.forEach(function(doc) {
+    data.set(doc.id, doc.data());
+  });
+  return data;
+}
+
 class DB {
   constructor(firebase, config) {
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
     this.db = firebase.firestore();
+    // this.db.enablePersistence();
   }
   subscribe(collection, document, callback) {
     if (document) {
@@ -9,50 +20,43 @@ class DB {
         .collection(collection)
         .doc(document)
         .onSnapshot(function(doc) {
-          callback(doc);
+          callback(doc.data());
         });
     } else {
       this.db.collection(collection).onSnapshot(function(querySnapshot) {
-        let data = [];
-        querySnapshot.forEach(function(doc) {
-          data.push(doc);
-        });
-        callback(data);
+        callback(snapshotToMap(querySnapshot));
       });
     }
   }
+  filteredSub(collection, filter, callback) {
+    this.db
+      .collection(collection)
+      .where(...filter)
+      .onSnapshot(function(querySnapshot) {
+        callback(snapshotToMap(querySnapshot));
+      });
+  }
   get(collection, document) {
     if (document) {
-      this.db
+      return this.db
         .collection(collection)
         .doc(document)
         .get()
-        .then(function(doc) {
-          return doc;
-        })
         .catch(function(error) {
           console.log("Error getting document:", error);
           return error;
         });
     } else {
-      this.db
+      return this.db
         .collection(collection)
         .get()
-        .then(function(querySnapshot) {
-          let data = [];
-          querySnapshot.forEach(function(doc) {
-            data.push(doc);
-          });
-          return data;
-        })
         .catch(function(error) {
           console.log("Error getting document:", error);
           return error;
         });
     }
   }
-  set(collection, data, document, merge) {
-    console.log(collection, data, document, merge);
+  set(collection, document, data, merge) {
     if (document) {
       let options = {};
       if (merge) {
@@ -69,6 +73,9 @@ class DB {
     } else {
       return this.add(collection, data);
     }
+  }
+  update(collection, document, data) {
+    return this.set(collection, document, data, true);
   }
   add(collection, data) {
     this.db

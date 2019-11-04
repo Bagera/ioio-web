@@ -68,6 +68,8 @@
 
 .Navbar-userMenu {
   margin-top: 4em;
+  padding: 0;
+  list-style: none;
 }
 .Navbar-button {
   font-family: inherit;
@@ -93,7 +95,7 @@
   display: none;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .Navbar {
     position: relative;
     padding: 0 0 1em;

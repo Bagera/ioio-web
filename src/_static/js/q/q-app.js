@@ -15,8 +15,9 @@ const queueConfig = {
   listSelector: ".TicketQueue",
   ticketSelector: ".TicketRoll-number",
   onclick: ticketId => {
-    console.log(ticketId);
-    db.set("tickets", { handled: true }, ticketId, true);
+    if (currentUser && currentUser.role && currentUser.role.admin) {
+      db.update("tickets", ticketId, { handled: true });
+    }
   }
 };
 const loginConfig = {
@@ -61,48 +62,10 @@ const resetConfig = {
   `,
   onsubmit: function(formData) {
     user.sendReset(formData.email, function() {});
+    resetModal.close();
   }
 };
-const registrationConfig = {
-  containerSelector: ".Modal-container",
-  template: `
-    <form class="Modal-form Modal-registration">
-      <div class="Modal-formBody">
-        <label>Email
-          <input name="email" type="email" required>
-        <label>
-        <label>Password
-          <input name="password" type="password" required>
-        <label>
-        <label>First name
-          <input name="first_name" type="text" required>
-        <label>
-        <label>Last name
-          <input name="last_name" type="text" required>
-        <label>
-        <label>Programme
-          <input name="studies" type="text" required>
-        <label>
-        
-      </div>
-      <button class="Modal-button">Register</button>
-    </form>
-  `,
-  onsubmit: function(formData) {
-    const { email, password, first_name, last_name, studies } = formData;
-    const newUser = {
-      first_name,
-      last_name,
-      studies
-    };
-    user.create(email, password, error => {
-      if (error) {
-      } else {
-        db.set("users", newUser, user.get().uid);
-      }
-    });
-  }
-};
+
 const ticketModalConfig = {
   containerSelector: ".Modal-container",
   template: `
@@ -129,42 +92,39 @@ const ticketModalConfig = {
     <button class="Modal-button Modal-ticketSubmit">Add ticket</button>
   </form>
   `,
-  onopen: () => {
+  onopen: async () => {
     let select = document.querySelector(".Modal-ticket select");
-    const options = qState
-      .get("settings")
-      .locations.map(room => `<option>${room}</option>`);
-    select.innerHTML = options.join("\n");
+    const options = await db.get("q", "settings");
+    // .data()
+    // .locations.map(room => `<option>${room}</option>`);
+    console.log(options);
+    // select.innerHTML = options.join("\n");
   },
   onsubmit: formData => {
     formData.timestamp = firebase.firestore.Timestamp.now().toMillis();
     formData.uid = user.get().uid;
-    formData.handled = false;
+    formData.active = true;
 
     if (formData.uid) {
-      db.set("tickets", formData);
+      db.add("tickets", formData);
     }
   }
 };
 const userConfig = {
   onupdate: function(userObj) {
-    if (qState.isLoaded()) {
+    if (appState.isLoaded()) {
       setCurrentUser(user.get());
     }
   }
 };
 
-const qState = new State(subs);
-const db = new DB(firebase, firebaseConfig);
 const queue = new Queue(queueConfig);
-const user = new User(firebase, userConfig);
+// const user = new User(firebase, userConfig);
 const registrationModal = new Modal(registrationConfig);
 const loginModal = new Modal(loginConfig);
 const ticketModal = new Modal(ticketModalConfig);
 const resetModal = new Modal(resetConfig);
 let currentUser = false;
-
-user.subscribe();
 
 document.body.classList.add("State-booting");
 document.querySelector(".Navbar-registration").onclick = function(ev) {
@@ -176,32 +136,6 @@ document.querySelector(".Navbar-login").onclick = function(ev) {
 document.querySelector(".Navbar-logout").onclick = function(ev) {
   user.logOut();
 };
-
-qState.onload = function() {
-  setCurrentUser(user.get());
-};
-qState.onupdate = function(appState) {
-  if (appState.isLoaded()) {
-    queue.render(appState.get("tickets"), appState.get("users"), currentUser);
-  }
-};
-
-subs.forEach(sub => {
-  const dataType = sub.document ? sub.document : sub.collection;
-  db.subscribe(sub.collection, sub.document, function(snapshotData) {
-    let data;
-    if (snapshotData.data) {
-      data = snapshotData.data();
-    } else {
-      data = {};
-      snapshotData.forEach(doc => {
-        data[doc.id] = doc.data();
-      });
-    }
-    qState.set(dataType, data);
-    setAppStateClasses(qState, currentUser, queue);
-  });
-});
 
 let touchStart = 0;
 let touchId = 0;
@@ -252,40 +186,3 @@ document.querySelector(".TicketRoll-button").ontouchmove = function(ev) {
     handleTicketTouchEnd(this);
   }
 };
-
-function userTickets(currentUser, tickets = []) {
-  return tickets.filter(t => t.uid === currentUser.uid);
-}
-
-function setAppStateClasses(appState, currentUser, queue) {
-  document.body.classList.toggle("State-loggedIn", currentUser);
-  document.body.classList.toggle("State-loggedOut", !currentUser);
-  document.body.classList.toggle("State-booting", !appState.isLoaded());
-
-  if (currentUser) {
-    document.body.classList.toggle(
-      "State-admin",
-      currentUser.role && currentUser.role.admin
-    );
-
-    const tickets = queue.sortTicketStore(appState.get("tickets"));
-    const hasTicket = userTickets(currentUser, tickets).length > 0;
-    document.body.classList.toggle("State-hasTicket", hasTicket);
-  }
-}
-
-function setCurrentUser(userObj) {
-  let userData = false;
-  if (userObj && userObj.uid) {
-    if (qState.get("users") && qState.get("roles")) {
-      userData = {
-        uid: userObj.uid,
-        user: qState.get("users")[userObj.uid],
-        role: qState.get("roles")[userObj.uid]
-      };
-    }
-  }
-  document.body.classList.remove("State-loggingIn");
-  currentUser = userData;
-  setAppStateClasses(qState, currentUser, queue);
-}

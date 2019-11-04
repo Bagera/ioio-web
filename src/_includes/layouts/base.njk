@@ -11,7 +11,7 @@
     {% if customScripts %}
     {% include "components/CustomScripts.njk" %}
     {% endif %}
-    <script defer src="/js/main.js"></script>
+    <script type="module" src="/js/app.mjs"></script>
 
   </head>
   <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>

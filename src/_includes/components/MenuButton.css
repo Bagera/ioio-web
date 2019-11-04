@@ -14,9 +14,24 @@
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   z-index: 20;
+  padding: 0;
+  border: solid 0.125em transparent;
+}
+.MenuButton:hover {
+  background-color: var(--color-main);
 }
 .MenuButton:active {
   transform: scale(0.9);
+}
+.MenuButton:focus {
+  border-color: var(--color-main);
+}
+.MenuButton::-moz-focus-inner {
+  border: 0;
+}
+.MenuButton:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-medium);
 }
 .MenuButton-text {
   display: none;
@@ -33,7 +48,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  transition: opacity 0.25s linear, transform 0.5s;
+  transition: opacity 0.1s linear, transform 0.2s;
 }
 .MenuButton-line:first-child {
   transform: translateY(-0.5em);

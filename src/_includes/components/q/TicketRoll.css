@@ -92,6 +92,7 @@
   font-family: monospace;
   font-weight: 700;
   font-size: 3em;
+  line-height: 1em;
 }
 .TicketRoll-numberPadding {
   opacity: 0.5;

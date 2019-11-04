@@ -1,7 +1,7 @@
 .Page {
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .Page {
     display: grid;
     grid-template-columns: 13em minmax(40%, 960px);

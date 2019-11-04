@@ -28,6 +28,7 @@
   padding: 2.25em 1em 1em;
   border-radius: 1em;
   overflow: auto;
+  animation: fadePopIn 0.25s 1;
 }
 
 .Modal-form {

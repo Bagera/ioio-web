@@ -38,7 +38,7 @@ class Queue {
       if (snapshot.hasOwnProperty(tId)) {
         const t = snapshot[tId];
 
-        if (!t.handled) {
+        if (t.active) {
           let ticket = t;
           ticket.id = tId;
           filteredTickets.push(ticket);
@@ -53,6 +53,12 @@ class Queue {
     return filteredTickets;
   }
   renderQueueTicket(ticket, user, currentUser) {
+    if (!user) {
+      user = {
+        first_name: "Anon",
+        last_name: "User"
+      };
+    }
     let ticketClass = "TicketQueue-ticket";
     if (currentUser && currentUser.uid === ticket.uid) {
       ticketClass += " TicketQueue-ownedTicket";

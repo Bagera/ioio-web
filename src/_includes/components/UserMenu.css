@@ -1,0 +1,25 @@
+.UserMenu {
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+}
+.UserMenu-button {
+  font-family: inherit;
+  font-size: 1em;
+  color: var(--color-text);
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  font-weight: inherit;
+}
+.UserMenu-button:hover,
+.UserMenu-button:active {
+  color: var(--color-main);
+}
+.UserMenu-button:focus {
+  color: var(--color-main);
+  outline: none;
+}
+.UserMenu-button::-moz-focus-inner {
+  border: 0;
+}
