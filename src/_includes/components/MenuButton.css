@@ -69,3 +69,9 @@
   opacity: 1;
   transform: translateY(0) rotateZ(45deg);
 }
+
+@media screen and (min-width: 768px) {
+  .MenuButton {
+    display: none;
+  }
+}
