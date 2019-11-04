@@ -50,6 +50,7 @@ function TicketRoll(ticketEl, tickets, user, db) {
       if (size >= 120) {
         handleTicketTouchEnd(ticketEl);
         handleTakeTicket(ticketModal);
+        touchStart = endTouch(ticketEl, spacer);
       }
     }
   };
