@@ -8,7 +8,7 @@ class TicketModal extends Modal {
   }
   async onopen() {
     let select = document.querySelector(".Modal-ticket select");
-    const settings = await this.db.get("q", "settings");
+    const settings = await this.db.get("settings", "q");
     const options = settings
       .data()
       .locations.map(room => `<option>${room}</option>`);

@@ -6,7 +6,7 @@ import UserMenu from "/js/UserMenu.mjs";
 import Q from "/js/q/Q.mjs";
 
 const subs = [
-  { collection: "q", document: "settings" },
+  { collection: "settings", document: "q" },
   { collection: "users", document: "" },
   { collection: "roles", document: "" },
   { collection: "tickets", document: "" }

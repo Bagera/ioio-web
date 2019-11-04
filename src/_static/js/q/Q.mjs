@@ -4,7 +4,7 @@ import TicketQueue from "./TicketQueue.mjs";
 import TicketRoll from "/js/q/TicketRoll.mjs";
 
 const subs = [
-  { collection: "q", document: "settings" },
+  { collection: "settings", document: "q" },
   { collection: "users", document: "" },
   { collection: "tickets", document: "" }
 ];
@@ -40,7 +40,6 @@ class Q {
 
   setState(dataType, snapshotData) {
     this.state[dataType] = snapshotData;
-    // console.log(this.state);
     this.render();
   }
 
@@ -59,6 +58,7 @@ class Q {
     const rollEl = document.querySelector(".TicketRoll");
     const currentUser = this.state.user;
     const tickets = this.state.tickets;
+    const settings = this.state.q;
 
     if (queueEl) {
       TicketQueue(queueEl, tickets, this.state.users, currentUser);

@@ -2,13 +2,7 @@ import { isEmpty } from "/js/Utils.mjs";
 
 class State {
   constructor(subs = []) {
-    this.data = {
-      settings: false,
-      roles: false,
-      tickets: false,
-      users: false,
-      currentUser: false
-    };
+    this.data = {};
     this.loaded = false;
     this.onload = undefined;
     this.onupdate = undefined;
@@ -19,6 +13,7 @@ class State {
       if (cache && !isEmpty(cache)) {
         this.data[key] = cache;
       } else {
+        this.data[key] = false;
         this.requiredData.push(key);
       }
     });
