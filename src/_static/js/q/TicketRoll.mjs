@@ -58,11 +58,11 @@ function TicketRoll(ticketEl, tickets, user, db) {
       touchStart = endTouch(ticketEl, spacer);
     }
   };
-  ticketEl.onpointerout = function() {
-    if (touchStart) {
-      touchStart = endTouch(ticketEl, spacer);
-    }
-  };
+  // ticketEl.onpointerout = function() {
+  //   if (touchStart) {
+  //     touchStart = endTouch(ticketEl, spacer);
+  //   }
+  // };
 }
 
 export default TicketRoll;
