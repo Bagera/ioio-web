@@ -9,9 +9,9 @@ class State {
     this.requiredData = [];
     subs.forEach(sub => {
       const key = sub.document ? sub.document : sub.collection;
-      const cache = JSON.parse(localStorage.getItem("data-" + key));
+      const cache = localStorage.getItem("data-" + key);
       if (cache && !isEmpty(cache)) {
-        this.data[key] = cache;
+        this.data[key] = JSON.parse(cache);
       } else {
         this.data[key] = false;
         this.requiredData.push(key);
@@ -22,7 +22,9 @@ class State {
     return this.requiredData.length === 0;
   };
   saveToCache = function(key, data) {
-    localStorage.setItem("data-" + key, JSON.stringify(data));
+    if (data) {
+      localStorage.setItem("data-" + key, JSON.stringify(data));
+    }
   };
   set = function(dataType, data) {
     this.data[dataType] = data;
