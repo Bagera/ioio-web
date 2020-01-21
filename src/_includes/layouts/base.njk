@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
     {% include "components/FirebaseScripts.njk" %}
-    {% if customScripts %}
-    {% include "components/CustomScripts.njk" %}
-    {% endif %}
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+    <script type="module" src="/js/user-menu.mjs"></script>
     <script type="module" src="/js/app.mjs"></script>
+    {% if customScripts %}
+      {% include "components/CustomScripts.njk" %}
+    {% endif %}
 
   </head>
   <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>

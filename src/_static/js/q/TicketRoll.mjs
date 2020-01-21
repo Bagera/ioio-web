@@ -1,7 +1,7 @@
 import TicketModal from "/js/modal/TicketModal.mjs";
 
-function handleTakeTicket(ticketModal) {
-  ticketModal.open();
+function handleTakeTicket(ticketModal, startPos) {
+  ticketModal.open(startPos);
 }
 function getPageY(ev) {
   return ev.pageY;
@@ -30,9 +30,8 @@ function TicketRoll(ticketEl, tickets, user, db) {
   let touchStart = 0;
   let touchTimer;
 
-  // Click
   ticketButton.onclick = function() {
-    handleTakeTicket(ticketModal);
+    handleTakeTicket(ticketModal, { x: "0", y: "-40vh" });
   };
 
   // Touch
@@ -52,7 +51,7 @@ function TicketRoll(ticketEl, tickets, user, db) {
       setElementHeight(spacer, size);
       if (size >= 120) {
         handleTicketTouchEnd(ticketEl);
-        handleTakeTicket(ticketModal);
+        handleTakeTicket(ticketModal, { x: "0", y: "-" + size + "px" });
         touchStart = endTouch(ticketEl, spacer);
       }
     }

@@ -1,6 +1,6 @@
 import DB from "/js/DB.mjs";
 import User from "/js/User.mjs";
-import TicketQueue from "./TicketQueue.mjs";
+import TicketQueue from "/js/q/TicketQueue.mjs";
 import TicketRoll from "/js/q/TicketRoll.mjs";
 
 const subs = [

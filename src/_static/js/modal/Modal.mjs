@@ -9,21 +9,21 @@ class Modal {
   constructor() {
     this.container = document.querySelector(".Modal-container");
   }
-  open() {
-    this.render(this.template || this.renderForm());
+  open = startPos => {
+    this.render(this.template || this.renderForm(), startPos);
     document.body.classList.add("State-modalOpen");
     if (this.onopen) {
       this.onopen();
     }
-  }
-  close() {
+  };
+  close = () => {
     if (this.onclose) {
       this.onclose();
     }
     this.container.innerHTML = "";
     document.body.classList.remove("State-modalOpen");
-  }
-  handleSubmit(ev) {
+  };
+  handleSubmit = ev => {
     ev.preventDefault();
     const formData = new FormData(ev.target);
     let data = {};
@@ -34,9 +34,14 @@ class Modal {
     if (this.onsubmit) {
       this.onsubmit(data, ev);
     }
-  }
-  render(children) {
-    this.container.innerHTML = `
+  };
+  render = (children, startPos) => {
+    let style = "";
+    if (startPos) {
+      style = `<style>.Modal{--startY: ${startPos.y ||
+        0};--startX: ${startPos.x || 0};}</style>`;
+    }
+    this.container.innerHTML = `${style}
     <div class="Modal-bg">
       <div class="Modal">
         <button class="Modal-button Modal-closeButton">close</button>
@@ -67,7 +72,7 @@ class Modal {
         this.handleSubmit(ev);
       };
     }
-  }
+  };
 }
 
 export default Modal;

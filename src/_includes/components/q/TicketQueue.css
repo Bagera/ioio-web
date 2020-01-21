@@ -15,24 +15,12 @@
   counter-reset: ticket-counter;
   max-width: 40em;
   margin: 0 auto;
-  padding: 0 1em;
 }
 .State-booting .TicketQueue-tickets {
   opacity: 0;
   transform: translateY(1em);
 }
 
-.TicketQueue-ticket {
-  counter-increment: ticket-counter;
-  font-size: 1.25em;
-  display: flex;
-}
-.TicketQueue-ticket::before {
-  content: counter(ticket-counter);
-  color: var(--color-medium);
-  font-weight: bold;
-  margin-right: 0.5em;
-}
 .TicketQueue-user {
   flex: 1;
 }

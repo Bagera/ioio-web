@@ -14,7 +14,7 @@ templateClass: Page
   {% include "components/Footer.njk" %}
 </footer>
 <script>
-  const firebaseConfig = {
+  var firebaseConfig = {
     {% for key, value in firebase %}
       {{key}}: "{{value}}",
     {% endfor %}

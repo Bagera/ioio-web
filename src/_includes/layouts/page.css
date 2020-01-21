@@ -1,10 +1,21 @@
 .Page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.Page-main {
+  flex: 1;
+}
+
+.Page-header {
+  text-align: center;
 }
 
 @media (min-width: 768px) {
   .Page {
     display: grid;
     grid-template-columns: 13em minmax(40%, 960px);
+    grid-template-rows: 1fr auto;
     grid-auto-rows: auto;
   }
   .Page-header {

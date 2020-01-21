@@ -11,6 +11,10 @@ export function arrayFrom(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 }
 
+export function isFunction(func) {
+  return typeof func === "function";
+}
+
 export function isEmpty(object) {
   if (!object) {
     return true;
@@ -37,8 +41,12 @@ export function getUserTickets(uid, tickets) {
 
   if (tickets) {
     if (tickets.forEach) {
-      tickets.forEach(t => {
-        checkAndInsert(uid, t.id, t.data());
+      tickets.forEach((t, key) => {
+        if (key) {
+          checkAndInsert(uid, key, t);
+        } else {
+          checkAndInsert(uid, t.id, t.data());
+        }
       });
     } else {
       for (const key in tickets) {

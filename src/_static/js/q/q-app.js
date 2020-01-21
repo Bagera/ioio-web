@@ -153,7 +153,7 @@ function handleTicketTouchMove(touch, target) {
     ticket.classList.add("TicketRoll-pulling");
   } else if (dist >= 120) {
     handleTicketTouchEnd(target);
-    ticketModal.open();
+    ticketModal.open({ x: "0", y: "-" + dist + "px" });
   }
 }
 function handleTicketTouchEnd(target) {
@@ -164,7 +164,7 @@ function handleTicketTouchEnd(target) {
 }
 
 document.querySelector(".TicketRoll-button").onclick = function() {
-  ticketModal.open();
+  ticketModal.open({ x: "0", y: "-40vh" });
 };
 document.querySelector(".TicketRoll-button").ontouchstart = function(ev) {
   handleTicketTouchStart(ev.touches[0]);

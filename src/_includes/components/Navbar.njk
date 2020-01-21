@@ -1,17 +1,20 @@
-<div class="Navbar">
+<div class="Navbar" id="Navbar" data-turbolinks-permanent>
 
   <a class="Navbar-brand" href="/" aria-label="Home">
     <span class="Navbar-logo">
-    {% include "images/ioio-logo.svg" %}
+    {% include "../../_static/img/ioio-logo.svg" %}
     </span>
   </a>
 
-  <ul class="Navbar-pageMenu">
-    <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="/">Home</a></li>
-    <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="/lending">Loans</a></li>
-    <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="/q">Q</a></li>
-  </ul>
+  <nav class="Navbar-nav">
 
-  {% include "components/UserMenu.njk" %}
+    <ul class="Navbar-pageMenu">
+      {% for item in settings.menu %}
+      <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="{{item.path}}">{{item.title}}</a></li>
+      {% endfor %}
+    </ul>
+
+    <user-menu class="user-menu"></user-menu>
+  </nav>
   
 </div>

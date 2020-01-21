@@ -1,9 +1,12 @@
 :root {
-  --color-main: #ff5485;
+  --color-main: #ff004d;
   --color-bg: #fff;
   --color-text: #404040;
+  --shade-dark: rgba(0, 0, 0, 0.7475);
   --color-light: #f4f4f4;
+  --shade-light: rgba(0, 0, 0, 0.04);
   --color-medium: #b8b8b8;
+  --shade-medium: rgba(0, 0, 0, 0.175);
   --color-mau: #e4022d;
 
   --color-danger: #ff004d;
@@ -180,12 +183,12 @@ loan
 @keyframes fadePopIn {
   0% {
     opacity: 0;
-    transform: scale(0.2);
+    transform: translateY(var(--startY, 0)) scale(0.2);
   }
   20% {
     opacity: 1;
   }
   100% {
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }

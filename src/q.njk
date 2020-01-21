@@ -2,11 +2,18 @@
 layout: layouts/page.njk
 tags:
   - nav
-navtitle: Q
+navtitle: Queue
 customScripts:
+  - {path: "/js/q/q-app.mjs", type: "module"}
 ---
 
   {% include "components/q/TicketRoll.njk" %}
 
   {% include "components/q/TicketQueue.njk" %}
+
+<style>
+.Navbar-brand {
+  display: none;
+}
+</style>
   

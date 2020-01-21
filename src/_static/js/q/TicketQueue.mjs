@@ -52,10 +52,8 @@ function TicketQueue(selector, tickets, users, currentUser) {
       if (userTicket) {
         elements.push(`
         <div class="TicketQueue-currentTicket">
-          <span>${userTicket.inFront + 1} people in front of you</span>
-          <span>Estimated waiting time is ${
-            userTicket.estimatedWait
-          } minutes</span>
+          <span>${userTicket.inFront} people in front of you</span>
+          <span>Estimated waiting time is ${userTicket.estimatedWait} minutes</span>
         </div>
         `);
       }

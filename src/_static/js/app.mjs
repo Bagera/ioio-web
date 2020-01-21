@@ -2,8 +2,8 @@ import State from "/js/State.mjs";
 import DB from "/js/DB.mjs";
 import User from "/js/User.mjs";
 
-import UserMenu from "/js/UserMenu.mjs";
-import Q from "/js/q/Q.mjs";
+import LoginModal from "/js/modal/LoginModal.mjs";
+import RegistrationModal from "/js/modal/RegistrationModal.mjs";
 
 const subs = [
   { collection: "settings", document: "q" },
@@ -12,6 +12,8 @@ const subs = [
   { collection: "tickets", document: "" }
 ];
 
+let view = false;
+let initialized = false;
 const db = new DB(firebase, firebaseConfig);
 
 const appState = new State(subs);
@@ -19,9 +21,6 @@ appState.onload = function() {};
 appState.onupdate = function(appState, newKey) {
   if (appState.isLoaded()) {
     update();
-    if (newKey === "tickets") {
-      user.update();
-    }
   }
 };
 
@@ -34,6 +33,8 @@ const userConfig = {
   }
 };
 const user = new User(firebase, userConfig);
+const loginModal = new LoginModal({ user });
+const registrationModal = new RegistrationModal({ user });
 
 subs.forEach(sub => {
   const dataType = sub.document ? sub.document : sub.collection;
@@ -52,14 +53,14 @@ subs.forEach(sub => {
   }
 });
 
-const userMenu = new UserMenu();
-const q = new Q();
-
 function setAppStateClasses(appState, user) {
   const currentUser = user.get();
   document.body.classList.toggle("State-loggedIn", currentUser);
   document.body.classList.toggle("State-loggedOut", !currentUser);
   document.body.classList.toggle("State-booting", !appState.isLoaded());
+
+  const userMenuComp = document.querySelector("user-menu");
+  userMenuComp.loggedin = currentUser;
 
   document.body.classList.toggle(
     "State-admin",
@@ -74,7 +75,23 @@ function setAppStateClasses(appState, user) {
 
 function update() {
   setAppStateClasses(appState, user);
-  renderApps(appState, user, db);
 }
 
-function renderApps(appState, user, db) {}
+function init() {
+  if (!initialized) {
+    initialized = true;
+
+    const userMenuComp = document.querySelector("user-menu");
+    userMenuComp.addEventListener("logout", user.logOut);
+    userMenuComp.addEventListener("login", loginModal.open);
+    userMenuComp.addEventListener("register", registrationModal.open);
+
+    if (typeof Turbolinks !== "undefined") {
+      Turbolinks.start();
+    }
+  }
+  update();
+}
+
+document.addEventListener("turbolinks:load", init);
+window.addEventListener("load", init);

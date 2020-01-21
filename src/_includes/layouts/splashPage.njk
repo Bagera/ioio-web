@@ -1,0 +1,11 @@
+---
+layout: layouts/page.njk
+templateClass: "Page SplashPage"
+---
+{% if headerImg %}
+{% include "components/PageHero.njk" %}
+{% endif %}
+
+<article class="SplashPage-content Content">
+  {{ content | safe }}
+</article>

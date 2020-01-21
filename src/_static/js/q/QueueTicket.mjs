@@ -14,7 +14,7 @@ function QueueTicket(ticket, user, currentUser) {
     ticketActions = `<button class="Button QueueTicket-resolve">handled</button>`;
   }
   return `
-    <li class=${ticketClass} data-ticket="${ticket.id}" >
+    <li class="${ticketClass}" data-ticket="${ticket.id}" >
       <span class="QueueTicket-user">${user.first_name} ${user.last_name}</span>
       <span class="QueueTicket-location">${ticket.location}</span>
       ${ticketActions}

@@ -50,6 +50,14 @@ module.exports = function(eleventyConfig) {
           res.end();
         });
       }
+    },
+    snippetOptions: {
+      rule: {
+        match: /<\/head>/i,
+        fn: function(snippet, match) {
+          return snippet + match;
+        }
+      }
     }
   });
 

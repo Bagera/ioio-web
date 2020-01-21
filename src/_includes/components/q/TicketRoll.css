@@ -1,5 +1,5 @@
 .TicketRoll {
-  --color-ticket-roll: var(--color-mau);
+  --color-ticket-roll: var(--color-main);
   position: relative;
   height: 4em;
   margin-bottom: 8em;
@@ -43,8 +43,9 @@
   position: relative;
   width: 8em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  border-bottom-right-radius: 4em;
-  border-bottom-left-radius: 4em;
+  /* border-bottom-right-radius: 4em;
+  border-bottom-left-radius: 4em; */
+  background-color: whitesmoke;
 }
 .TicketRoll-ticket {
   display: none;
@@ -65,7 +66,6 @@
 .TicketRoll-spacer {
   width: 100%;
   height: 0em;
-  background-color: whitesmoke;
   transition: height 0.25s;
 }
 .TicketRoll-pulling .TicketRoll-spacer {
@@ -81,9 +81,10 @@
   height: 8em;
   padding: 0;
   border: none;
-  border-bottom-right-radius: 4em;
-  border-bottom-left-radius: 4em;
-  background-color: whitesmoke;
+  border-top: dashed 2px var(--shade-medium);
+  border-bottom: dashed 2px var(--shade-medium);
+  /* border-bottom-right-radius: 4em;
+  border-bottom-left-radius: 4em; */
   z-index: 2;
 }
 .TicketRoll-number {
