@@ -2,7 +2,7 @@
   --color-ticket-roll: var(--color-main);
   position: relative;
   height: 4em;
-  margin-bottom: 8em;
+  margin-bottom: 12em;
   font-size: 16px;
   background-color: var(--color-ticket-roll);
   padding: 2em 1em;
@@ -31,6 +31,9 @@
   z-index: 3;
   border-radius: 0.25em;
 }
+.State-hasTicket .TicketRoll {
+  margin-bottom: 2em;
+}
 .TicketRoll-container {
   position: relative;
   z-index: 2;
@@ -43,9 +46,10 @@
   position: relative;
   width: 8em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  /* border-bottom-right-radius: 4em;
-  border-bottom-left-radius: 4em; */
   background-color: whitesmoke;
+}
+.TicketRoll-ticket:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 .TicketRoll-ticket {
   display: none;
@@ -83,9 +87,17 @@
   border: none;
   border-top: dashed 2px var(--shade-medium);
   border-bottom: dashed 2px var(--shade-medium);
-  /* border-bottom-right-radius: 4em;
-  border-bottom-left-radius: 4em; */
   z-index: 2;
+}
+/* Remove outline. Focus is displayed on parent element */
+.TicketRoll-ticket:focus-within {
+  box-shadow: 0 2px 4px var(--color-main);
+}
+.TicketRoll-button:focus {
+  outline: none;
+}
+.TicketRoll-button::-moz-focus-inner {
+  border: 0;
 }
 .TicketRoll-number {
   display: block;
