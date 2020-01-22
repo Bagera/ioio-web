@@ -36,6 +36,16 @@ function getUserTicket(user, tickets) {
   }
 }
 
+function getEstimationMsg(userTicket) {
+  const msg = {
+    0: "Yay! You are first in line! Help is on the way.",
+    1: "Get ready! Just one person in front of you."
+  };
+  return userTicket && msg[userTicket.inFront]
+    ? msg[userTicket.inFront]
+    : `There are ${userTicket.inFront} people in front of you.</p><p>Estimated waiting time is about ${userTicket.estimatedWait} minutes.`;
+}
+
 function TicketQueue(selector, tickets, users, currentUser) {
   if (!tickets) {
     selector.innerHTML = `
@@ -52,8 +62,7 @@ function TicketQueue(selector, tickets, users, currentUser) {
       if (userTicket) {
         elements.push(`
         <div class="TicketQueue-currentTicket">
-          <span>${userTicket.inFront} people in front of you</span>
-          <span>Estimated waiting time is ${userTicket.estimatedWait} minutes</span>
+          <p>${getEstimationMsg(userTicket)}</p>
         </div>
         `);
       }
