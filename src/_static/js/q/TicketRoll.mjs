@@ -1,10 +1,7 @@
-import TicketModal from "/js/modal/TicketModal.mjs";
+import GetTicketModal from "/js/modal/GetTicketModal.mjs";
 
-function handleTakeTicket(ticketModal, startPos) {
-  ticketModal.open(startPos);
-}
-function getPageY(ev) {
-  return ev.pageY;
+function handleTakeTicket(getTicketModal, startPos) {
+  getTicketModal.open(startPos);
 }
 function handleTicketTouchEnd(ticketEl) {
   ticketEl.classList.remove("TicketRoll-pulling");
@@ -23,21 +20,57 @@ function setElementHeight(element, size) {
   }
 }
 
-function TicketRoll(ticketEl, tickets, user, db) {
-  const ticketModal = new TicketModal({ user, db });
+function getEstimationString(minutes = 0) {
+  const h = Math.floor(minutes / 60);
+  const min = minutes % 60;
+  let est = "";
+
+  //? Do you have a space between number and unit?
+  if (h) {
+    est += `${h}h `;
+  }
+  est += `${min}min`;
+  return est;
+}
+
+function getWithPadding(number = 1) {
+  const str = number + "";
+  let pad = "";
+  while (str.length + pad.length < 3) {
+    pad = "0" + pad;
+  }
+  if (pad) {
+    return `<span class="TicketRoll-numberPadding">${pad}</span>${number}`;
+  } else {
+    return number;
+  }
+}
+
+function TicketRoll(ticketEl, tickets = new Map(), user, db) {
+  const getTicketModal = new GetTicketModal({ user, db });
+  const ticketNumber = ticketEl.querySelector(".TicketRoll-number");
+  const ticketEstimation = ticketEl.querySelector(".TicketRoll-estimation");
   const ticketButton = ticketEl.querySelector(".TicketRoll-button");
   const spacer = ticketEl.querySelector(".TicketRoll-spacer");
+  let estimatedWait = 0;
   let touchStart = 0;
   let touchTimer;
 
+  tickets.forEach(ticket => {
+    estimatedWait += ticket.est;
+  });
+
+  ticketNumber.innerHTML = getWithPadding(tickets.size + 1);
+  ticketEstimation.innerHTML = getEstimationString(estimatedWait);
+
   ticketButton.onclick = function() {
-    handleTakeTicket(ticketModal, { x: "0", y: "-40vh" });
+    handleTakeTicket(getTicketModal, { x: "0", y: "-40vh" });
   };
 
   // Touch
   ticketEl.onpointerdown = function(ev) {
     if (ev.pointerType === "touch") {
-      touchStart = getPageY(ev);
+      touchStart = ev.pageY;
     }
   };
   ticketEl.onpointermove = function(ev) {
@@ -45,13 +78,13 @@ function TicketRoll(ticketEl, tickets, user, db) {
       clearTimeout(touchTimer);
       touchTimer = null;
       ticketEl.classList.add("TicketRoll-pulling");
-      const currY = getPageY(ev);
+      const currY = ev.pageY;
       const size = currY - touchStart;
 
       setElementHeight(spacer, size);
       if (size >= 120) {
         handleTicketTouchEnd(ticketEl);
-        handleTakeTicket(ticketModal, { x: "0", y: "-" + size + "px" });
+        handleTakeTicket(getTicketModal, { x: "0", y: "-" + size + "px" });
         touchStart = endTouch(ticketEl, spacer);
       }
     }
