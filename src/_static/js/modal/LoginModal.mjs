@@ -18,7 +18,7 @@ class LoginModal extends Modal {
     document.body.classList.remove("State-loggingIn");
     this.close();
   };
-  renderForm = () => {
+  template() {
     return `
       <form class="Modal-form Modal-login">
         <div class="Modal-formBody">
@@ -33,7 +33,7 @@ class LoginModal extends Modal {
         <button class="Modal-button">Log in</button>
       </form>
     `;
-  };
+  }
 }
 
 export default LoginModal;

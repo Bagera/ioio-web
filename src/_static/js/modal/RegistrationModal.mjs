@@ -15,7 +15,7 @@ class RegistrationModal extends Modal {
     await user.create(email, password, newUser);
     this.close();
   }
-  renderForm() {
+  template() {
     return `
     <form class="Modal-form Modal-registration">
       <div class="Modal-formBody">

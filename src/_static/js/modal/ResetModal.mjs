@@ -9,7 +9,7 @@ class ResetModal extends Modal {
     await this.user.sendReset(formData.email);
     this.close();
   }
-  renderForm() {
+  template() {
     return `
     <form class="Modal-form Modal-reset">
       <div class="Modal-formBody">

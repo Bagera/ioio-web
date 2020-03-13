@@ -1,6 +1,6 @@
-import Modal from "/js/modal/Modal.mjs";
+import TicketModal from "/js/modal/TicketModal.mjs";
 
-class GetTicketModal extends Modal {
+class GetTicketModal extends TicketModal {
   constructor(props) {
     super(props);
     this.user = props.user;
@@ -24,7 +24,7 @@ class GetTicketModal extends Modal {
       this.close();
     }
   }
-  renderForm() {
+  template() {
     return `
     <form class="Modal-form Modal-ticket" type="post">
       <div class="Modal-formBody">
