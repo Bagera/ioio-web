@@ -11,7 +11,7 @@ class TicketModal extends Modal {
       style = `<style>.Modal{--startY: ${startPos.y ||
         0};--startX: ${startPos.x || 0};}</style>`;
     }
-    this.container.innerHTML = `${style}
+    this.container().innerHTML = `${style}
     <div class="TicketModal Modal-bg">
       <div class="Modal">
         <button class="Modal-button Modal-closeButton">nah</button>

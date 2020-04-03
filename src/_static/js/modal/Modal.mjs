@@ -7,8 +7,11 @@ function parseValue(value) {
 
 class Modal {
   constructor() {
-    this.container = document.querySelector(".Modal-container");
+    this.selector = ".Modal-container";
   }
+  container = () => {
+    return document.querySelector(this.selector);
+  };
 
   open = startPos => {
     this.render(this.template(), startPos);
@@ -22,7 +25,7 @@ class Modal {
     if (this.onclose) {
       this.onclose();
     }
-    this.container.innerHTML = "";
+    this.container().innerHTML = "";
     document.body.classList.remove("State-modalOpen");
   };
 
@@ -73,7 +76,7 @@ class Modal {
         0};--startX: ${startPos.x || 0};}</style>`;
     }
 
-    this.container.innerHTML = `${style}
+    this.container().innerHTML = `${style}
     <div class="Modal-bg">
       <div class="Modal">
         <button class="Modal-button Modal-closeButton">close</button>
