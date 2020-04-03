@@ -21,6 +21,12 @@
   opacity: 0;
   transform: translateY(1em);
 }
+.State-qOffline .TicketQueue-tickets {
+  display: none;
+}
+.State-qOffline.State-admin .TicketQueue-tickets {
+  display: block;
+}
 
 .TicketQueue-user {
   flex: 1;
@@ -48,4 +54,7 @@
 }
 .TicketQueue-currentTicket p {
   margin: 0 0 0.5em;
+}
+.State-qOffline .TicketQueue-currentTicket {
+  opacity: 0;
 }

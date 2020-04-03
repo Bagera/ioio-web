@@ -27,7 +27,7 @@ function sortLoansStore(loans) {
 }
 
 function Loans(selector, loans, users, currentUser) {
-  if (!loans) {
+  if (!loans || !users) {
     selector.innerHTML = `
       <div class="Loans-loader">
         Loading queue...

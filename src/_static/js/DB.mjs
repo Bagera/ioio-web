@@ -1,3 +1,5 @@
+import { makeSubId } from "/js/Utils.mjs";
+
 function snapshotToMap(snapshot) {
   let data = new Map();
   snapshot.forEach(function(doc) {
@@ -12,20 +14,49 @@ class DB {
       firebase.initializeApp(config);
     }
     this.db = firebase.firestore();
-    // this.db.enablePersistence();
+    this.subs = {};
   }
-  subscribe(collection, document, callback) {
-    if (document) {
-      this.db
-        .collection(collection)
-        .doc(document)
-        .onSnapshot(function(doc) {
-          callback(doc.data());
+  emit(subId) {
+    const data = this.subs[subId];
+    const event = new CustomEvent(`snapshot`, {
+      detail: {
+        subId,
+        data
+      }
+    });
+    window.dispatchEvent(event);
+  }
+  handleSnapshot(subId, data) {
+    this.subs[subId] = data;
+    this.emit(subId);
+  }
+  subscribe(collection, document, filter) {
+    const subId = makeSubId([collection, document], filter);
+    const handleSnapshot = this.handleSnapshot.bind(this);
+    if (!this.subs[subId]) {
+      if (document) {
+        this.db
+          .collection(collection)
+          .doc(document)
+          .onSnapshot(function(doc) {
+            handleSnapshot(subId, doc.data());
+          });
+      } else if (filter) {
+        this.db
+          .collection(collection)
+          .where(...filter)
+          .onSnapshot(function(querySnapshot) {
+            handleSnapshot(subId, snapshotToMap(querySnapshot));
+          });
+      } else {
+        this.db.collection(collection).onSnapshot(function(querySnapshot) {
+          handleSnapshot(subId, snapshotToMap(querySnapshot));
         });
+      }
     } else {
-      this.db.collection(collection).onSnapshot(function(querySnapshot) {
-        callback(snapshotToMap(querySnapshot));
-      });
+      setTimeout(() => {
+        this.emit(subId);
+      }, 10);
     }
   }
   filteredSub(collection, filter, callback) {
@@ -56,12 +87,11 @@ class DB {
         });
     }
   }
-  set(collection, document, data, merge) {
+  set(collection, document, data, merge = false) {
     if (document) {
-      let options = {};
-      if (merge) {
-        options.merge = true;
-      }
+      const options = {
+        merge
+      };
       this.db
         .collection(collection)
         .doc(document)

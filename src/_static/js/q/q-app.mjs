@@ -1,16 +1,27 @@
 import Q from "/js/q/Q.mjs";
 
-let qApp;
+let app;
+const appSelector = ".TicketQueue";
+const appSettings = {
+  db: window.db,
+  subs: [
+    { collection: "settings", document: "q" },
+    { collection: "users", document: "" },
+    { collection: "tickets", document: "", filter: ["active", "==", true] }
+  ]
+};
 
-function init(onLoad) {
-  const queueEl = document.querySelector(".TicketQueue");
+function init() {
+  const queueEl = document.querySelector(appSelector);
   if (queueEl) {
-    if (!qApp) {
-      qApp = new Q(queueEl);
+    if (!app) {
+      app = new Q(appSettings);
     } else {
-      qApp.render();
+      app.render();
     }
   }
 }
 
 document.addEventListener("turbolinks:load", () => init());
+
+init();

@@ -6,7 +6,9 @@ import RegistrationModal from "/js/modal/RegistrationModal.mjs";
 
 class UserMenu {
   constructor() {
-    this.user = new User(firebase, {
+    this.user = new User({
+      auth: firebase.auth(),
+      db: window.db,
       onupdate: this.onupdate.bind(this)
     });
   }

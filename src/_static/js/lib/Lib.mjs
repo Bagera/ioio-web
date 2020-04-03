@@ -1,29 +1,28 @@
-import DB from "/js/DB.mjs";
+import { makeSubId } from "/js/Utils.mjs";
+
 import User from "/js/User.mjs";
 import Loans from "/js/lib/Loans.mjs";
 
 class Lib {
-  constructor({ subs }) {
+  constructor({ db, subs }) {
     this.state = {};
-    this.db = new DB(firebase, firebaseConfig);
-    this.user = new User(firebase, {
+    this.db = db;
+    console.log("db", db);
+    this.user = new User({
+      auth: firebase.auth(),
+      db: this.db,
       onupdate: this.onUserUpdate.bind(this)
     });
     subs.forEach(sub => {
       const dataType = sub.document ? sub.document : sub.collection;
-      if (dataType === "loans") {
-        this.db.filteredSub(
-          sub.collection,
-          ["active", "==", true],
-          snapshotData => {
-            this.setState(dataType, snapshotData);
-          }
-        );
-      } else {
-        this.db.subscribe(sub.collection, sub.document, snapshotData => {
-          this.setState(dataType, snapshotData);
-        });
-      }
+      let subId = makeSubId([sub.collection, sub.document], sub.filter);
+
+      this.db.subscribe(sub.collection, sub.document, sub.filter);
+      window.addEventListener("snapshot", ({ detail }) => {
+        if (detail.subId === subId) {
+          this.setState(dataType, detail.data);
+        }
+      });
     });
   }
 

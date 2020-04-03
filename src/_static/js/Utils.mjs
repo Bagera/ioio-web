@@ -58,3 +58,25 @@ export function getUserTickets(uid, tickets) {
   }
   return userTicketsArray;
 }
+
+export function makeSubId(arr, filter = []) {
+  let id = arr.reduce((str, val) => {
+    if (val) {
+      if (str) {
+        str += "-";
+      }
+      str += val;
+    }
+    return str;
+  }, "");
+  if (filter.length) {
+    id += "-filter-";
+    id += filter.reduce((str, val) => {
+      if (val) {
+        str += val;
+      }
+      return str;
+    }, "");
+  }
+  return id;
+}

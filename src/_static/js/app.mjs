@@ -1,3 +1,5 @@
+import { makeSubId } from "/js/Utils.mjs";
+
 import State from "/js/State.mjs";
 import DB from "/js/DB.mjs";
 import User from "/js/User.mjs";
@@ -9,12 +11,12 @@ const subs = [
   { collection: "settings", document: "q" },
   { collection: "users", document: "" },
   { collection: "roles", document: "" },
-  { collection: "tickets", document: "" }
+  { collection: "tickets", document: "", filter: ["active", "==", true] }
 ];
 
 let view = false;
 let initialized = false;
-const db = new DB(firebase, firebaseConfig);
+window.db = new DB(firebase, firebaseConfig);
 
 const appState = new State(subs);
 appState.onload = function() {};
@@ -24,37 +26,32 @@ appState.onupdate = function(appState, newKey) {
   }
 };
 
-const userConfig = {
-  db: db,
-  onupdate: function() {
-    if (appState.isLoaded()) {
-      update();
-    }
+window.addEventListener("userupdate", ({ detail }) => {
+  if (appState.isLoaded()) {
+    update();
   }
-};
-const user = new User(firebase, userConfig);
+});
+const user = new User({ auth: firebase.auth(), db: window.db });
 const loginModal = new LoginModal({ user });
 const registrationModal = new RegistrationModal({ user });
 
 subs.forEach(sub => {
   const dataType = sub.document ? sub.document : sub.collection;
-  if (dataType === "tickets") {
-    db.filteredSub(sub.collection, ["active", "==", true], function(
-      snapshotData
-    ) {
-      appState.set(dataType, snapshotData);
+  let subId = makeSubId([sub.collection, sub.document], sub.filter);
+
+  window.db.subscribe(sub.collection, sub.document, sub.filter);
+  window.addEventListener("snapshot", ({ detail }) => {
+    if (detail.subId === subId) {
+      appState.set(dataType, detail.data);
       update();
-    });
-  } else {
-    db.subscribe(sub.collection, sub.document, function(snapshotData) {
-      appState.set(dataType, snapshotData);
-      update();
-    });
-  }
+    }
+  });
 });
 
 function setAppStateClasses(appState, user) {
   const currentUser = user.get();
+  let userRole = "user";
+
   document.body.classList.toggle("State-loggedIn", currentUser);
   document.body.classList.toggle("State-loggedOut", !currentUser);
   document.body.classList.toggle("State-booting", !appState.isLoaded());
@@ -62,14 +59,24 @@ function setAppStateClasses(appState, user) {
   const userMenuComp = document.querySelector("user-menu");
   userMenuComp.loggedin = currentUser;
 
-  document.body.classList.toggle(
-    "State-admin",
-    currentUser && currentUser.role && currentUser.role.admin
-  );
-
+  if (appState.data.roles && currentUser) {
+    const roles = appState.data.roles;
+    if (roles.has && roles.has(currentUser.uid)) {
+      userRole = "admin";
+    }
+  }
+  document.body.classList.toggle("State-admin", userRole === "admin");
   document.body.classList.toggle(
     "State-hasTicket",
     currentUser && currentUser.hasTicket === true
+  );
+
+  document.body.classList.toggle(
+    "State-qOffline",
+    appState &&
+      appState.data &&
+      appState.data.q &&
+      appState.data.q.active === false
   );
 }
 
@@ -82,9 +89,18 @@ function init() {
     initialized = true;
 
     const userMenuComp = document.querySelector("user-menu");
-    userMenuComp.addEventListener("logout", user.logOut);
-    userMenuComp.addEventListener("login", loginModal.open);
-    userMenuComp.addEventListener("register", registrationModal.open);
+    userMenuComp.addEventListener("logout", () => {
+      document.body.classList.remove("State-showMenu");
+      user.logOut();
+    });
+    userMenuComp.addEventListener("login", () => {
+      document.body.classList.remove("State-showMenu");
+      loginModal.open();
+    });
+    userMenuComp.addEventListener("register", () => {
+      document.body.classList.remove("State-showMenu");
+      registrationModal.open();
+    });
 
     if (typeof Turbolinks !== "undefined") {
       Turbolinks.start();
@@ -94,4 +110,3 @@ function init() {
 }
 
 document.addEventListener("turbolinks:load", init);
-window.addEventListener("load", init);

@@ -34,6 +34,22 @@
 .State-hasTicket .TicketRoll {
   margin-bottom: 2em;
 }
+.TicketRoll-offline {
+  display: flex;
+  margin-top: 2em;
+  height: 12em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.TicketRoll-offline,
+.State-booting .TicketRoll-offline,
+.State-loggingIn .TicketRoll-offline {
+  display: none;
+}
+.State-qOffline .TicketRoll-offline {
+  display: flex;
+}
 .TicketRoll-container {
   position: relative;
   z-index: 2;
@@ -41,6 +57,9 @@
   width: 8.5em;
   overflow: hidden;
   padding: 0 0.25em 0.25em;
+}
+.State-qOffline .TicketRoll-container {
+  display: none;
 }
 .TicketRoll-ticket {
   position: relative;
