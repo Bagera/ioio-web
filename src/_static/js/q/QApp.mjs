@@ -4,7 +4,7 @@ import User from "/js/User.mjs";
 import TicketQueue from "/js/q/TicketQueue.mjs";
 import TicketRoll from "/js/q/TicketRoll.mjs";
 
-class Q {
+class QApp {
   constructor({ db, subs = [] }) {
     this.state = {};
     this.db = db;
@@ -30,7 +30,6 @@ class Q {
   }
 
   onUserUpdate(user) {
-    console.log(user);
     this.setState("user", user);
   }
 
@@ -39,12 +38,17 @@ class Q {
     this.render();
   }
 
-  handleTicketResolve(ev, currentUser, db) {
+  resolveTicket(ticketId, currentUser, db) {
+    if (currentUser && currentUser.admin) {
+      db.update("tickets", ticketId, { active: false });
+    }
+  }
+
+  handleTicketClick(ev, currentUser, db) {
     let target = ev.target;
-    if (target && target.classList.contains("QueueTicket-resolve")) {
-      const ticketId = target.parentNode.dataset.ticket;
-      if (currentUser && currentUser.admin) {
-        db.update("tickets", ticketId, { active: false });
+    if (target) {
+      if (target.classList.contains("QueueTicket-resolve")) {
+        this.resolveTicket(target.parentNode.dataset.ticket, currentUser, db);
       }
     }
   }
@@ -57,9 +61,9 @@ class Q {
 
     if (queueEl) {
       TicketQueue(queueEl, tickets, this.state.users, currentUser);
-      queueEl.onclick = ev => {
-        this.handleTicketResolve(ev, currentUser, this.db);
-      };
+      queueEl.addEventListener("click", ev => {
+        this.handleTicketClick(ev, currentUser, this.db);
+      });
     }
     if (rollEl) {
       TicketRoll(rollEl, tickets, this.user, this.db);
@@ -67,4 +71,4 @@ class Q {
   }
 }
 
-export default Q;
+export default QApp;

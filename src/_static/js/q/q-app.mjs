@@ -1,4 +1,4 @@
-import Q from "/js/q/Q.mjs";
+import QApp from "/js/q/QApp.mjs";
 
 let app;
 const appSelector = ".TicketQueue";
@@ -15,7 +15,7 @@ function init() {
   const queueEl = document.querySelector(appSelector);
   if (queueEl) {
     if (!app) {
-      app = new Q(appSettings);
+      app = new QApp(appSettings);
     } else {
       app.render();
     }
