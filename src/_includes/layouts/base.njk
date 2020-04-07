@@ -19,5 +19,12 @@
   <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>
       {{ content | safe }}
       {% include "components/Modal.njk" %}
+  <script>
+    var firebaseConfig = {
+      {% for key, value in firebase %}
+        {{key}}: "{{value}}",
+      {% endfor %}
+    };
+  </script>
   </body>
 </html>

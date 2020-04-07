@@ -13,10 +13,3 @@ templateClass: Page
 <footer class="Page-footer">
   {% include "components/Footer.njk" %}
 </footer>
-<script>
-  var firebaseConfig = {
-    {% for key, value in firebase %}
-      {{key}}: "{{value}}",
-    {% endfor %}
-  };
-</script>
