@@ -57,7 +57,9 @@ function setAppStateClasses(appState, user) {
   document.body.classList.toggle("State-booting", !appState.isLoaded());
 
   const userMenuComp = document.querySelector("user-menu");
-  userMenuComp.loggedin = currentUser;
+  if (userMenuComp) {
+    userMenuComp.loggedin = currentUser;
+  }
 
   if (appState.data.roles && currentUser) {
     const roles = appState.data.roles;
@@ -84,11 +86,9 @@ function update() {
   setAppStateClasses(appState, user);
 }
 
-function init() {
-  if (!initialized) {
-    initialized = true;
-
-    const userMenuComp = document.querySelector("user-menu");
+function initUserMenu() {
+  const userMenuComp = document.querySelector("user-menu");
+  if (userMenuComp) {
     userMenuComp.addEventListener("logout", () => {
       document.body.classList.remove("State-showMenu");
       user.logOut();
@@ -101,6 +101,14 @@ function init() {
       document.body.classList.remove("State-showMenu");
       registrationModal.open();
     });
+  }
+}
+
+function init() {
+  if (!initialized) {
+    initialized = true;
+
+    initUserMenu();
 
     if (typeof Turbolinks !== "undefined") {
       Turbolinks.start();

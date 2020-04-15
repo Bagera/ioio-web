@@ -7,7 +7,8 @@ const appSettings = {
   subs: [
     { collection: "settings", document: "q" },
     { collection: "users", document: "" },
-    { collection: "tickets", document: "", filter: ["active", "==", true] }
+    { collection: "tickets", document: "", filter: ["active", "==", true] },
+    { collection: "info", document: "", filter: ["active", "==", true] }
   ]
 };
 
