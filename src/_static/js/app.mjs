@@ -11,31 +11,25 @@ const subs = [
   { collection: "settings", document: "q" },
   { collection: "users", document: "" },
   { collection: "roles", document: "" },
-  { collection: "tickets", document: "", filter: ["active", "==", true] }
+  { collection: "tickets", document: "", filter: ["active", "==", true] },
 ];
 
-let view = false;
 let initialized = false;
 window.db = new DB(firebase, firebaseConfig);
 
 const appState = new State(subs);
-appState.onload = function() {};
-appState.onupdate = function(appState, newKey) {
-  if (appState.isLoaded()) {
-    update();
-  }
-};
 
 window.addEventListener("userupdate", ({ detail }) => {
   if (appState.isLoaded()) {
     update();
   }
 });
+
 const user = new User({ auth: firebase.auth(), db: window.db });
 const loginModal = new LoginModal({ user });
 const registrationModal = new RegistrationModal({ user });
 
-subs.forEach(sub => {
+subs.forEach((sub) => {
   const dataType = sub.document ? sub.document : sub.collection;
   let subId = makeSubId([sub.collection, sub.document], sub.filter);
 

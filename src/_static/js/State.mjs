@@ -7,7 +7,7 @@ class State {
     this.onload = undefined;
     this.onupdate = undefined;
     this.requiredData = [];
-    subs.forEach(sub => {
+    subs.forEach((sub) => {
       const key = sub.document ? sub.document : sub.collection;
       const cache = localStorage.getItem("data-" + key);
       if (cache && !isEmpty(cache)) {
@@ -18,21 +18,19 @@ class State {
       }
     });
   }
-  isLoaded = function() {
+  isLoaded = function () {
     return this.requiredData.length === 0;
   };
-  saveToCache = function(key, data) {
+  saveToCache = function (key, data) {
     if (data) {
       localStorage.setItem("data-" + key, JSON.stringify(data));
     }
   };
-  set = function(dataType, data) {
+  set = function (dataType, data) {
     this.data[dataType] = data;
-    this.requiredData = this.requiredData.filter(key => key !== dataType);
+    this.requiredData = this.requiredData.filter((key) => key !== dataType);
     this.saveToCache(dataType, data);
-    if (this.onupdate) {
-      this.onupdate(this, dataType);
-    }
+
     if (this.isLoaded() && !this.loaded) {
       this.loaded = true;
       if (this.onload) {
@@ -40,7 +38,7 @@ class State {
       }
     }
   };
-  get = function(dataType) {
+  get = function (dataType) {
     return this.data[dataType];
   };
 }
