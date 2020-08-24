@@ -10,9 +10,9 @@ class RegistrationModal extends Modal {
     const newUser = {
       first_name,
       last_name,
-      studies
+      studies,
     };
-    await user.create(email, password, newUser);
+    await this.user.create(email, password, newUser);
     this.close();
   }
   template() {
