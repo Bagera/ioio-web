@@ -4,6 +4,10 @@
   fill: var(--color-text);
   color: var(--color-text);
   text-decoration: none;
+  margin: 0;
+}
+.Navbar-title {
+  display: none;
 }
 .Navbar-logo {
   display: inline-block;
@@ -93,6 +97,12 @@
   display: none;
 }
 
+.Navbar .user-menu-user {
+  max-width: 10em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 @media (min-width: 768px) {
   .Navbar-nav {
     position: relative;
@@ -107,5 +117,9 @@
   }
   .Navbar-link {
     display: block;
+  }
+  .Navbar .user-menu-user {
+    margin-right: -0.25em;
+    margin-left: -0.25em;
   }
 }

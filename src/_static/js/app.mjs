@@ -51,8 +51,15 @@ function setAppStateClasses(appState, user) {
   document.body.classList.toggle("State-booting", !appState.isLoaded());
 
   const userMenuComp = document.querySelector("user-menu");
-  if (userMenuComp) {
-    userMenuComp.loggedin = currentUser;
+  if (userMenuComp && currentUser) {
+    userMenuComp.loggedin = true;
+    userMenuComp.name = currentUser.first_name + " " + currentUser.last_name;
+    userMenuComp.avatar = currentUser.avatar;
+  }
+  if (userMenuComp && !currentUser) {
+    userMenuComp.loggedin = false;
+    userMenuComp.name = false;
+    userMenuComp.avatar = false;
   }
 
   if (appState.data.roles && currentUser) {

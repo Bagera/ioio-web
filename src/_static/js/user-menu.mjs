@@ -4,12 +4,12 @@ class UserMenu extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["loggedin"];
+    return ["loggedin", "name", "avatar"];
   }
 
   attributeChangedCallback(attrName, oldValue, newValue) {
     if (newValue !== oldValue) {
-      this[attrName] = this.hasAttribute(attrName);
+      this[attrName] = newValue;
       this.render();
     }
   }
@@ -22,6 +22,30 @@ class UserMenu extends HTMLElement {
       this.setAttribute("loggedin", true);
     } else {
       this.removeAttribute("loggedin");
+    }
+  }
+
+  get avatar() {
+    console.log(this.getAttribute("avatar"));
+    return this.getAttribute("avatar");
+  }
+  set avatar(url) {
+    if (url) {
+      this.setAttribute("avatar", url);
+    } else {
+      this.removeAttribute("avatar");
+    }
+  }
+
+  get name() {
+    console.log(this.getAttribute("name"));
+    return this.getAttribute("name");
+  }
+  set name(string) {
+    if (string) {
+      this.setAttribute("name", string);
+    } else {
+      this.removeAttribute("name");
     }
   }
 
@@ -47,10 +71,20 @@ class UserMenu extends HTMLElement {
 
   render() {
     const loggedin = this.hasAttribute("loggedin");
+    const name = this.getAttribute("name");
+    const avatar = this.getAttribute("avatar");
     if (loggedin) {
-      this.innerHTML = `<button class="user-menu-logout">log out</button>`;
+      this.innerHTML = `
+      <h2 class="user-menu-title">Logged in as:</h2>
+      <section class="user-menu-user">
+      <p class="user-menu-name">${name}</p>
+      <img width="50" height="50" class="user-menu-avatar" alt="user avatar image" src="${avatar}"/>
+      </section>
+      <button class="user-menu-logout">log out</button>
+      `;
     } else {
       this.innerHTML = `
+        <h2 class="user-menu-title">Not logged in</h2>
         <button class="user-menu-login">log in</button>
         <button class="user-menu-register">register</button>
       `;
