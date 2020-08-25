@@ -11,7 +11,7 @@ class GetTicketModal extends TicketModal {
     const settings = await this.db.get("settings", "q");
     const options = settings
       .data()
-      .locations.map(room => `<option>${room}</option>`);
+      .locations.map((room) => `<option>${room}</option>`);
     select.innerHTML = options.join("\n");
   }
   async onsubmit(formData) {
@@ -37,16 +37,16 @@ class GetTicketModal extends TicketModal {
         <fieldset>
           <legend>How long is your issue</legend>
           <label>
-            5 min
+            About 5 minutes
             <input type="radio" name="est" value="5" checked="true" />
           </label>
           <label>
-            10 min
+            About 10 minutes
             <input type="radio" name="est" value="10" />
           </label>
         </fieldset>
       </div>
-      <button class="Modal-button Modal-ticketSubmit">Add ticket</button>
+      <button class="Modal-button Modal-ticketSubmit">Take a ticket</button>
     </form>
     `;
   }
