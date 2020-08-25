@@ -2,7 +2,7 @@ user-menu {
   font-size: 0.75em;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 .user-menu-title {
   font-size: 1em;
@@ -46,4 +46,10 @@ user-menu button::-moz-focus-inner {
   width: 2.778em;
   height: 2.778em;
   margin-left: 0.5em;
+}
+
+@media (min-width: 768px) {
+  user-menu {
+    align-items: flex-end;
+  }
 }
