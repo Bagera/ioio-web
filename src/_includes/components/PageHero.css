@@ -1,3 +1,17 @@
+.PageHero {
+  position: relative;
+}
 .PageHero-image {
   max-width: 100%;
+}
+
+.PageHero-title {
+  position: absolute;
+  bottom: 2em;
+  right: 0;
+  font-size: 2em;
+  padding: 0.25em 0.5em;
+  margin: 0 auto;
+  color: var(--color-main);
+  background-color: var(--color-bg);
 }

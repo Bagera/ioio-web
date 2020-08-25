@@ -4,10 +4,9 @@ tags:
   - nav
 navtitle: Home
 title: ioio lab
-headerImg: 3d-printer.jpg
+headerImg: cutting-mat.jpg
+headerTitle: The Institute of Interactive Objects
 ---
-
-# The ioio lab
 
 The ioio lab is the place where IxD students can get help with projects, studies or borrow electronic components for your prototypes.
 

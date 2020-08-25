@@ -5,6 +5,9 @@
 }
 .Page-main {
   flex: 1;
+}
+.Page-main .Content {
+  flex: 1;
   padding: 0 1em;
 }
 
