@@ -21,7 +21,7 @@ function getUserTicket(user, tickets) {
   let inFront = 0;
   let estimatedWait = 0;
   let ticket;
-  tickets.forEach(t => {
+  tickets.forEach((t) => {
     if (t.uid != user.uid) {
       if (!ticket) {
         inFront++;
@@ -39,7 +39,7 @@ function getUserTicket(user, tickets) {
 function getEstimationMsg(userTicket) {
   const msg = {
     0: "Yay! You are first in line! Help is on the way.",
-    1: "Get ready! Just one person in front of you."
+    1: "Get ready! Just one person in front of you.",
   };
   return userTicket && msg[userTicket.inFront]
     ? msg[userTicket.inFront]
@@ -47,38 +47,26 @@ function getEstimationMsg(userTicket) {
 }
 
 function TicketQueue(selector, tickets, users, currentUser) {
-  if (!tickets) {
-    selector.innerHTML = `
-      <div class="TicketQueue-loader">
-        Loading queue...
-      </div>
-    `;
-  } else {
+  selector.classList.toggle("TicketQueue-loaded", tickets);
+  if (tickets) {
+    const currentTicketEl = selector.querySelector(
+      ".TicketQueue-currentTicket"
+    );
+    const queueEl = selector.querySelector(".TicketQueue-tickets");
     const queue = sortTicketStore(tickets);
     let elements = [];
 
     if (queue && currentUser && currentUser.hasTicket) {
       const userTicket = getUserTicket(currentUser, queue);
       if (userTicket) {
-        elements.push(`
-        <div class="TicketQueue-currentTicket">
-          <p>${getEstimationMsg(userTicket)}</p>
-        </div>
-        `);
+        currentTicketEl.innerHTML = `<p>${getEstimationMsg(userTicket)}</p>`;
       }
     }
-
-    elements.push(`
-      <ol class="TicketQueue-tickets">
-      ${queue
-        .map(ticket => {
-          return QueueTicket(ticket, users.get(ticket.uid), currentUser);
-        })
-        .join("\n")}
-      </ol>
-    `);
-
-    selector.innerHTML = elements.join("\n");
+    queueEl.innerHTML = queue
+      .map((ticket) => {
+        return QueueTicket(ticket, users.get(ticket.uid), currentUser);
+      })
+      .join("\n");
   }
 }
 

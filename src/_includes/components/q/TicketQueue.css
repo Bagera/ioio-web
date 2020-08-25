@@ -7,6 +7,9 @@
   font-weight: 700;
   animation: pulse 0.5s infinite alternate;
 }
+.TicketQueue-loaded .TicketQueue-loader {
+  display: none;
+}
 
 .TicketQueue-tickets {
   opacity: 1;
@@ -38,20 +41,34 @@
   display: initial;
 }
 
-.TicketQueue-currentTicket {
+.TicketQueue-currentTicket,
+.TicketQueue-cta {
+  display: none;
+  align-items: center;
   max-width: 20em;
   margin: 0 auto 2em;
   padding: 1.5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  height: 8em;
+}
+
+.TicketQueue-currentTicket {
   background-color: whitesmoke;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   border-right: dashed 2px var(--shade-medium);
   border-left: dashed 2px var(--shade-medium);
-  height: 8em;
 }
+
+.TicketQueue-cta {
+  text-align: center;
+}
+
+.State-hasTicket .TicketQueue-loaded .TicketQueue-currentTicket {
+  display: flex;
+}
+.State-loggedOut .TicketQueue-loaded .TicketQueue-cta {
+  display: block;
+}
+
 .TicketQueue-currentTicket p {
   margin: 0 0 0.5em;
 }
