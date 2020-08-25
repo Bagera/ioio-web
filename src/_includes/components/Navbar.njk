@@ -1,23 +1,23 @@
 <div class="Navbar" id="Navbar" data-turbolinks-permanent>
 
-  <h1 class="Navbar-brand">
-    <a class="Navbar-brandLink" href="/" aria-label="Home">
-      <span class="Navbar-title">ioio</span>
-      <span class="Navbar-logo">
+  <a class="Navbar-brand" href="/" aria-label="Home">
+    <span class="Navbar-title">ioio</span>
+    <span class="Navbar-logo">
       {% include "../../_static/img/ioio-logo.svg" %}
-      </span>
-    </a>
-  </h1>
+    </span>
+  </a>
 
   <nav class="Navbar-nav">
 
     <ul class="Navbar-pageMenu">
       {% for item in settings.menu %}
-      <li class="Navbar-pageMenuItem"><a  class="Navbar-link" href="{{item.path}}">{{item.title}}</a></li>
+        <li class="Navbar-pageMenuItem">
+          <a  class="Navbar-link" href="{{item.path}}">{{item.title}}</a>
+        </li>
       {% endfor %}
     </ul>
 
     <user-menu class="user-menu"></user-menu>
   </nav>
-  
+
 </div>
