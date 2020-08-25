@@ -6,12 +6,18 @@
 }
 
 .PageHero-title {
-  position: absolute;
-  bottom: 2em;
-  right: 0;
   font-size: 2em;
   padding: 0.25em 0.5em;
   margin: 0 auto;
   color: var(--color-main);
   background-color: var(--color-bg);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .PageHero-title {
+    position: absolute;
+    bottom: 2em;
+    right: 0;
+  }
 }

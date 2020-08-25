@@ -5,8 +5,9 @@ user-menu {
   align-items: center;
 }
 .user-menu-title {
-  font-size: 1em;
+  font-size: 0.75em;
   margin: 0;
+  opacity: 0.5;
 }
 user-menu button {
   font-family: inherit;
@@ -16,6 +17,7 @@ user-menu button {
   padding: 0;
   border: none;
   font-weight: inherit;
+  cursor: pointer;
 }
 user-menu button:hover,
 user-menu button:active {

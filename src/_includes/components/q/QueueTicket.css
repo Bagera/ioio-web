@@ -20,9 +20,11 @@
 .QueueTicket-user {
   flex: 1;
   margin-right: 1em;
+  font-weight: 700;
 }
 .QueueTicket-location {
   margin-right: 1em;
+  font-weight: 700;
 }
 .QueueTicket-own {
   border-color: var(--color-main);
