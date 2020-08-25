@@ -2,13 +2,19 @@ export function sortBy(array, property, reverse) {
   const returnArray = [...array];
   const sortOrder = reverse ? -1 : 1;
 
-  return returnArray.sort(function(a, b) {
+  return returnArray.sort(function (a, b) {
     return (a[property] - b[property]) * sortOrder;
   });
 }
 
 export function arrayFrom(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
+}
+
+export function mapToArray(map) {
+  const keys = [...map.keys()];
+  const values = [...map.values()];
+  return keys.map((key, i) => Object.assign({}, { key }, values[i]));
 }
 
 export function isFunction(func) {
