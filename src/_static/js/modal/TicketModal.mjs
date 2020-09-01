@@ -5,11 +5,12 @@ class TicketModal extends Modal {
     super(props);
   }
 
-  render = (children, startPos) => {
+  render(children, startPos) {
     let style = "";
     if (startPos) {
-      style = `<style>.Modal{--startY: ${startPos.y ||
-        0};--startX: ${startPos.x || 0};}</style>`;
+      style = `<style>.Modal{--startY: ${startPos.y || 0};--startX: ${
+        startPos.x || 0
+      };}</style>`;
     }
     this.container().innerHTML = `${style}
     <div class="TicketModal Modal-bg">
@@ -21,7 +22,7 @@ class TicketModal extends Modal {
     `;
 
     this.bindEvents();
-  };
+  }
 }
 
 export default TicketModal;

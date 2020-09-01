@@ -9,27 +9,27 @@ class Modal {
   constructor() {
     this.selector = ".Modal-container";
   }
-  container = () => {
+  container() {
     return document.querySelector(this.selector);
-  };
+  }
 
-  open = startPos => {
+  open(startPos) {
     this.render(this.template(), startPos);
     document.body.classList.add("State-modalOpen");
     if (this.onopen) {
       this.onopen();
     }
-  };
+  }
 
-  close = () => {
+  close() {
     if (this.onclose) {
       this.onclose();
     }
     this.container().innerHTML = "";
     document.body.classList.remove("State-modalOpen");
-  };
+  }
 
-  handleSubmit = ev => {
+  handleSubmit(ev) {
     ev.preventDefault();
     const formData = new FormData(ev.target);
     let data = {};
@@ -40,21 +40,21 @@ class Modal {
     if (this.onsubmit) {
       this.onsubmit(data, ev);
     }
-  };
+  }
 
-  bindEvents = () => {
-    document.querySelector(".Modal-closeButton").onclick = ev => {
+  bindEvents() {
+    document.querySelector(".Modal-closeButton").onclick = (ev) => {
       this.close();
       ev.preventDefault();
     };
 
     const modalBg = document.querySelector(".Modal-bg");
-    modalBg.onclick = ev => {
+    modalBg.onclick = (ev) => {
       if (!ev.target.closest(".Modal")) {
         this.close();
       }
     };
-    modalBg.onkeydown = ev => {
+    modalBg.onkeydown = (ev) => {
       if (ev.key === "Escape") {
         this.close();
       }
@@ -63,17 +63,18 @@ class Modal {
     const form = document.querySelector(".Modal form");
     if (form) {
       document.querySelector(".Modal input").focus();
-      form.onsubmit = ev => {
+      form.onsubmit = (ev) => {
         this.handleSubmit(ev);
       };
     }
-  };
+  }
 
-  render = (children, startPos) => {
+  render(children, startPos) {
     let style = "";
     if (startPos) {
-      style = `<style>.Modal{--startY: ${startPos.y ||
-        0};--startX: ${startPos.x || 0};}</style>`;
+      style = `<style>.Modal{--startY: ${startPos.y || 0};--startX: ${
+        startPos.x || 0
+      };}</style>`;
     }
 
     this.container().innerHTML = `${style}
@@ -86,7 +87,7 @@ class Modal {
     `;
 
     this.bindEvents();
-  };
+  }
 }
 
 export default Modal;

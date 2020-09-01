@@ -6,18 +6,18 @@ class LoginModal extends Modal {
     super(props);
     this.user = props.user;
   }
-  onopen = () => {
+  onopen() {
     document.querySelector(".Modal-resetEmail").onclick = () => {
       const resetModal = new ResetModal({ user: this.user });
       resetModal.open();
     };
-  };
-  onsubmit = async formData => {
+  }
+  async onsubmit(formData) {
     document.body.classList.add("State-loggingIn");
     await this.user.logIn(formData.email, formData.password);
     document.body.classList.remove("State-loggingIn");
     this.close();
-  };
+  }
   template() {
     return `
       <form class="Modal-form Modal-login">
