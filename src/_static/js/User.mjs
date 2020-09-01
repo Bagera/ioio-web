@@ -34,14 +34,14 @@ class User {
       });
     });
   }
-  setState = (dataType, data) => {
+  setState(dataType, data) {
     this.state[dataType] = data;
     this.setUser();
-  };
-  get = () => {
+  }
+  get() {
     return this.user;
-  };
-  create = (email, password, userData, onError) => {
+  }
+  create(email, password, userData, onError) {
     return this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async (dbUser) => {
@@ -56,11 +56,11 @@ class User {
         }
         return error;
       });
-  };
-  update = async (userData) => {
+  }
+  async update(userData) {
     this.db.update("users", this.user.uid, userData);
-  };
-  logIn = (email, password, onSuccess, onError) => {
+  }
+  logIn(email, password, onSuccess, onError) {
     return this.auth
       .signInWithEmailAndPassword(email, password)
       .then(function () {
@@ -74,8 +74,8 @@ class User {
           onError();
         }
       });
-  };
-  logOut = (onSuccess, onError) => {
+  }
+  logOut(onSuccess, onError) {
     return this.auth
       .signOut()
       .then(function () {
@@ -89,8 +89,8 @@ class User {
           onError();
         }
       });
-  };
-  sendReset = (email, onSuccess, onError) => {
+  }
+  sendReset(email, onSuccess, onError) {
     return this.auth
       .sendPasswordResetEmail(email)
       .then(function () {
@@ -104,7 +104,7 @@ class User {
           onError();
         }
       });
-  };
+  }
   emit() {
     const event = new CustomEvent(`userupdate`, {
       detail: {
@@ -121,7 +121,7 @@ class User {
     let avatar = `https://api.adorable.io/avatars/50/${avatarSeed}.png`;
     return { avatarSeed, avatar };
   }
-  setUser = async () => {
+  async setUser() {
     const oldUser = Object.assign({}, this.user);
     const { dbUser, roles, users, tickets } = this.state;
     if (dbUser && users) {
@@ -146,7 +146,7 @@ class User {
         this.emit();
       }
     }
-  };
+  }
 }
 
 export default User;

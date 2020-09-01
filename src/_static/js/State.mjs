@@ -18,15 +18,15 @@ class State {
       }
     });
   }
-  isLoaded = function () {
+  isLoaded() {
     return this.requiredData.length === 0;
-  };
-  saveToCache = function (key, data) {
+  }
+  saveToCache(key, data) {
     if (data) {
       localStorage.setItem("data-" + key, JSON.stringify(data));
     }
-  };
-  set = function (dataType, data) {
+  }
+  set(dataType, data) {
     this.data[dataType] = data;
     this.requiredData = this.requiredData.filter((key) => key !== dataType);
     this.saveToCache(dataType, data);
@@ -37,10 +37,10 @@ class State {
         this.onload(this);
       }
     }
-  };
-  get = function (dataType) {
+  }
+  get(dataType) {
     return this.data[dataType];
-  };
+  }
 }
 
 export default State;
