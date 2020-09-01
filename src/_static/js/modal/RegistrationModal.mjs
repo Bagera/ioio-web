@@ -23,7 +23,7 @@ class RegistrationModal extends Modal {
           <input name="email" type="email" required>
         <label>
         <label>Password
-          <input name="password" type="password" required>
+          <input name="password" type="password" required minlength="6">
         <label>
         <label>First name
           <input name="first_name" type="text" required>
