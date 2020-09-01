@@ -8,9 +8,21 @@
     "@11ty/eleventy": "^0.10.0",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "@babel/preset-env": "^7.11.5",
+    "autoprefixer": "^9.8.6",
+    "babel-preset-env": "^1.7.0",
+    "child_process": "^1.0.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "luxon": "^1.23.0",
     "markdown-it": "^8.4.2",
-    "markdown-it-anchor": "^5.2.7"
+    "markdown-it-anchor": "^5.2.7",
+    "postcss-css-variables": "^0.17.0",
+    "postcss-csso": "^4.0.0",
+    "postcss-import": "^12.0.1"
   },
   "scripts": {
     "build": "npx eleventy",
@@ -27,5 +39,8 @@
   "bugs": {
     "url": "https://github.com:Bagera/ioio-web/issues"
   },
-  "homepage": "https://github.com:Bagera/ioio-web#readme"
+  "homepage": "https://github.com:Bagera/ioio-web#readme",
+  "browserslist": [
+    "last 2 versions"
+  ]
 }
