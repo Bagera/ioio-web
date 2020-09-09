@@ -11,7 +11,7 @@ function QueueTicket(ticket, user, currentUser) {
     ticketClass += " QueueTicket-own";
     ticketActions = `<button class="Button QueueTicket-cancel">drop</button>`;
   }
-  if ((currentUser && currentUser.admin) || currentUser.uid === ticket.uid) {
+  if (currentUser && (currentUser.admin || currentUser.uid === ticket.uid)) {
     ticketActions = `<button class="Button QueueTicket-resolve">handled</button>`;
   }
   return `
