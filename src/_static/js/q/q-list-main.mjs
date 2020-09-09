@@ -8,8 +8,8 @@ const appSettings = {
     { collection: "settings", document: "q" },
     { collection: "users", document: "" },
     { collection: "tickets", document: "", filter: ["active", "==", true] },
-    { collection: "info", document: "", filter: ["active", "==", true] }
-  ]
+    { collection: "info", document: "", filter: ["active", "==", true] },
+  ],
 };
 
 function init() {
@@ -21,6 +21,9 @@ function init() {
       app.render();
     }
   }
+  setTimeout(() => {
+    location.reload();
+  }, 5000);
 }
 
 document.addEventListener("turbolinks:load", () => init());
