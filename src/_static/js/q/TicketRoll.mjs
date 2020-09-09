@@ -46,7 +46,7 @@ function getWithPadding(number = 1) {
   }
 }
 
-function TicketRoll(ticketEl, tickets = new Map(), user, db) {
+function TicketRoll(ticketEl, queue = new Array(), user, db) {
   const getTicketModal = new GetTicketModal({ user, db });
   const ticketNumber = ticketEl.querySelector(".TicketRoll-number");
   const ticketEstimation = ticketEl.querySelector(".TicketRoll-estimation");
@@ -56,24 +56,24 @@ function TicketRoll(ticketEl, tickets = new Map(), user, db) {
   let touchStart = 0;
   let touchTimer;
 
-  tickets.forEach(ticket => {
+  queue.forEach((ticket) => {
     estimatedWait += ticket.est;
   });
 
-  ticketNumber.innerHTML = getWithPadding(tickets.size + 1);
+  ticketNumber.innerHTML = getWithPadding(queue.length + 1);
   ticketEstimation.innerHTML = getEstimationString(estimatedWait);
 
-  ticketButton.onclick = function() {
+  ticketButton.onclick = function () {
     handleTakeTicket(getTicketModal, { x: "0", y: "-40vh" });
   };
 
   // Touch
-  ticketEl.onpointerdown = function(ev) {
+  ticketEl.onpointerdown = function (ev) {
     if (ev.pointerType === "touch") {
       touchStart = ev.pageY;
     }
   };
-  ticketEl.onpointermove = function(ev) {
+  ticketEl.onpointermove = function (ev) {
     if (touchStart) {
       clearTimeout(touchTimer);
       touchTimer = null;
@@ -89,12 +89,12 @@ function TicketRoll(ticketEl, tickets = new Map(), user, db) {
       }
     }
   };
-  ticketEl.onpointerup = function() {
+  ticketEl.onpointerup = function () {
     if (touchStart) {
       touchStart = endTouch(ticketEl, spacer);
     }
   };
-  ticketEl.onpointerout = function(ev) {
+  ticketEl.onpointerout = function (ev) {
     if (touchStart) {
       if (!ev.target.parentNode.classList.contains("TicketRoll-ticket")) {
         setTimeout(() => {

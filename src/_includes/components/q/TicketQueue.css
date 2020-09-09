@@ -40,38 +40,3 @@
 .State-admin .TicketQueue-resolve {
   display: initial;
 }
-
-.TicketQueue-currentTicket,
-.TicketQueue-cta {
-  display: none;
-  align-items: center;
-  max-width: 20em;
-  margin: 0 auto 2em;
-  padding: 1.5em;
-  height: 8em;
-}
-
-.TicketQueue-currentTicket {
-  background-color: whitesmoke;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  border-right: dashed 2px var(--shade-medium);
-  border-left: dashed 2px var(--shade-medium);
-}
-
-.TicketQueue-cta {
-  text-align: center;
-}
-
-.State-hasTicket .TicketQueue-loaded .TicketQueue-currentTicket {
-  display: flex;
-}
-.State-loggedOut .TicketQueue-loaded .TicketQueue-cta {
-  display: block;
-}
-
-.TicketQueue-currentTicket p {
-  margin: 0 0 0.5em;
-}
-.State-qOffline .TicketQueue-currentTicket {
-  opacity: 0;
-}
