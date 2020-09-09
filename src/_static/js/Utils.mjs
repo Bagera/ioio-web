@@ -7,6 +7,22 @@ export function sortBy(array, property, reverse) {
   });
 }
 
+export function sortTicketStore(tickets) {
+  let filteredTickets = [];
+
+  if (tickets) {
+    tickets.forEach((ticket, id) => {
+      ticket.id = id;
+      filteredTickets.push(ticket);
+    });
+    if (filteredTickets.length > 0) {
+      filteredTickets = sortBy(filteredTickets, "timestamp");
+    }
+  }
+
+  return filteredTickets;
+}
+
 export function arrayFrom(arrayLike) {
   return Array.prototype.slice.call(arrayLike);
 }

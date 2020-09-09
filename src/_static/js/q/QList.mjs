@@ -1,4 +1,4 @@
-import { makeSubId } from "/js/Utils.mjs";
+import { makeSubId, sortTicketStore } from "/js/Utils.mjs";
 
 import TicketQueue from "/js/q/TicketQueue.mjs";
 
@@ -8,7 +8,7 @@ class QList {
     this.db = db;
     this.subIds = {};
 
-    subs.forEach(sub => {
+    subs.forEach((sub) => {
       const dataType = sub.document ? sub.document : sub.collection;
       let subId = makeSubId([sub.collection, sub.document], sub.filter);
       this.subIds[subId] = dataType;
@@ -30,10 +30,12 @@ class QList {
 
   render() {
     const queueEl = document.querySelector(".TicketQueue");
-    const tickets = this.state.tickets;
+    const queue = this.state.tickets
+      ? sortTicketStore(this.state.tickets)
+      : undefined;
 
     if (queueEl) {
-      TicketQueue(queueEl, tickets, this.state.users);
+      TicketQueue(queueEl, queue, this.state.users);
     }
   }
 }

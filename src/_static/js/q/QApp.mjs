@@ -1,4 +1,4 @@
-import { makeSubId, sortBy } from "/js/Utils.mjs";
+import { makeSubId, sortTicketStore } from "/js/Utils.mjs";
 
 import User from "/js/User.mjs";
 import TicketRoll from "/js/q/TicketRoll.mjs";
@@ -86,29 +86,13 @@ class QApp {
     }
   }
 
-  sortTicketStore(tickets) {
-    let filteredTickets = [];
-
-    if (tickets) {
-      tickets.forEach((ticket, id) => {
-        ticket.id = id;
-        filteredTickets.push(ticket);
-      });
-      if (filteredTickets.length > 0) {
-        filteredTickets = sortBy(filteredTickets, "timestamp");
-      }
-    }
-
-    return filteredTickets;
-  }
-
   render() {
     const currentTicketEl = document.querySelector(".CurrentTicket");
     const queueEl = document.querySelector(".TicketQueue");
     const rollEl = document.querySelector(".TicketRoll");
     const currentUser = this.state.user;
     const queue = this.state.tickets
-      ? this.sortTicketStore(this.state.tickets)
+      ? sortTicketStore(this.state.tickets)
       : undefined;
 
     if (currentTicketEl) {
