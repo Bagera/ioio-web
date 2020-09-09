@@ -6,15 +6,16 @@ function QueueTicket(ticket, user, currentUser) {
     };
   }
   let ticketClass = "QueueTicket";
+  let ticketActions = "";
   if (currentUser && currentUser.uid === ticket.uid) {
     ticketClass += " QueueTicket-own";
+    ticketActions = `<button class="Button QueueTicket-cancel">drop</button>`;
   }
-  let ticketActions = "";
-  if (currentUser && currentUser.admin) {
+  if ((currentUser && currentUser.admin) || currentUser.uid === ticket.uid) {
     ticketActions = `<button class="Button QueueTicket-resolve">handled</button>`;
   }
   return `
-    <li class="${ticketClass}" data-ticket="${ticket.id}" >
+    <li class="${ticketClass}" data-ticketid="${ticket.id}"  data-uid="${ticket.uid}" >
       <img width="50" height="50" class="QueueTicket-avatar" alt="user avatar image" src="https://api.adorable.io/avatars/50/${user.avatarSeed}.png"/>
       <span class="QueueTicket-user">${user.first_name} ${user.last_name}</span>
       <span class="QueueTicket-location">${ticket.location}</span>
