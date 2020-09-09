@@ -23,7 +23,7 @@ function init() {
   }
   setTimeout(() => {
     location.reload();
-  }, 3600);
+  }, 3600 * 1000);
 }
 
 document.addEventListener("turbolinks:load", () => init());
