@@ -24,8 +24,8 @@ class LoginModal extends Modal {
         <div class="Modal-formBody">
           <label>Email
             <input name="email" type="email" required>
-          <label>
-          </label>Password
+          </label>
+          <label>Password
             <input name="password" type="password" required>
           </label>
           <button type="button" class="Modal-button Modal-resetEmail">Forgot your password?</button>
