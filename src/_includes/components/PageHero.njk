@@ -1,6 +1,8 @@
-<div class="PageHero">
+<div class="PageHero"{% if headerColor %} style="background-color:{{headerColor}}"{% endif %}>
+  {% if headerImg %}
   <img class="PageHero-image" src="/img/{{headerImg}}">
+  {% endif %}
   {% if headerTitle %}
-    <h1 class="PageHero-title">{{headerTitle}}</h1>
+  <h1 class="PageHero-title">{{headerTitle}}</h1>
   {% endif %}
 </div>

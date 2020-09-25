@@ -28,6 +28,11 @@ body {
   font-family: "Open Sans", Arial, sans-serif;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .button-action {
   border: 0;
   color: var(--color-light);

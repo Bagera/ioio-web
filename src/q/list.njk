@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+tags:
+  - nav
+navtitle: Q List
+templateClass: QList
+customScripts:
+  - {path: "/js/q/q-list-main.mjs", type: "module"}
+---
+
+<heaser class="QList-header">
+  <h1 class="QList-title">Welcome to Q</h1>
+  <p class="QList-count">0</p>
+  <p class="QList-instructions">Go to <a href="https://{{settings.host}}/q">{{settings.host}}/q</a> to get a ticket or to to <a href="https://{{settings.host}}/q/help">{{settings.host}}/q/help</a> to read up on how to use Q</p>
+</heaser>
+<main class="QList-queue">
+  {% include "components/q/TicketQueue.njk" %}
+</main>
+<aside class="QList-info">
+</aside>

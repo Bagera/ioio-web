@@ -1,5 +1,6 @@
 .PageHero {
   position: relative;
+  min-height: 15em;
 }
 .PageHero-image {
   max-width: 100%;
