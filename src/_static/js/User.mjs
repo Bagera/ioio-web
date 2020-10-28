@@ -118,8 +118,10 @@ class User {
     for (let i = 0; i < 10; i++) {
       avatarSeed += Math.floor(Math.random() * 10);
     }
-    let avatar = `https://api.adorable.io/avatars/50/${avatarSeed}.png`;
-    return { avatarSeed, avatar };
+    return { avatarSeed };
+  }
+  get avatar() {
+    return `https://avatars.dicebear.com/api/bottts/${avatarSeed}.svg`;
   }
   async setUser() {
     const oldUser = Object.assign({}, this.user);
