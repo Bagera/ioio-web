@@ -1,0 +1,13 @@
+:root {
+  --color-main: #ff004d;
+  --color-bg: #fff;
+  --color-text: #404040;
+  --shade-dark: rgba(0, 0, 0, 0.7475);
+  --color-light: #f4f4f4;
+  --shade-light: rgba(0, 0, 0, 0.04);
+  --color-medium: #b8b8b8;
+  --shade-medium: rgba(0, 0, 0, 0.175);
+  --color-mau: #e4022d;
+
+  --color-danger: #ff004d;
+}

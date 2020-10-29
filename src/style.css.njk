@@ -2,11 +2,15 @@
 permalink: css/style.css
 ---
 
-{% include "style.css" %}
+{# BASE: #}
+{% include "style/variables.css" %}
+{% include "style/base.css" %}
 
+{# LAYOUTS: #}
 {% include "layouts/page.css" %}
 {% include "layouts/splashPage.css" %}
 
+{# COMPONENTS: #}
 {% include "components/Navbar.css" %}
 {% include "components/user-menu.css" %}
 {% include "components/Footer.css" %}
@@ -14,4 +18,8 @@ permalink: css/style.css
 {% include "components/Modal.css" %}
 {% include "components/PageHero.css" %}
 
+{# PAGES: #}
+{% include "style/home.css" %}
+
+{# Q: #}
 {% include "components/q/Q-style.njk" %}
