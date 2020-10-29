@@ -1,8 +1,5 @@
 ---
 layout: layouts/splashPage.njk
-tags:
-  - nav
-navtitle: TAs
 title: ioio lab TAs
 headerImg: cutting-mat.jpg
 headerTitle: The ioio lab TAs

@@ -1,8 +1,5 @@
 ---
 layout: layouts/splashPage.njk
-tags:
-  - nav
-navtitle: Home
 title: ioio lab
 headerImg: cutting-mat.jpg
 headerTitle: The Institute of Interactive Objects

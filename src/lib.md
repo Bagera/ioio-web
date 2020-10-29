@@ -1,8 +1,6 @@
 ---
 layout: layouts/splashPage.njk
-tags:
-  - nav
-navtitle: Lib
+title: ioio lib
 headerImg: cutting-mat.jpg
 headerTitle: The ioio Library
 customScripts:
