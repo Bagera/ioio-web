@@ -3,17 +3,19 @@
   <section class="Footer-content">
     <div class="Footer-contact">
       <h4>Get in touch</h4>
-    <ul>
-      <li><a href="mailto:info@ioio.mah.se">info@ioio.mah.se</a></li>
-      {% for item in settings.social %}
-      <li><a href="{{item.path}}">{{item.title}}</a></li>
-      {% endfor %}
-    </ul>
+      <ul>
+        {% for item in settings.contact %}
+        <li><a href="{{item.path}}">{{item.title}}</a></li>
+        {% endfor %}
+      </ul>
     </div>
     <div class="Footer-info">
       <h4>Opening hours in the lab</h4>
-      <p>Mondays: 15.00 - 17.00<br/>
-      Wednesdays: 13.00 - 15.00</p>
+      <ul>
+        {% for item in settings.openingHours %}
+        <li><span class="Footer-day">{{item.day}}</span> <span class="Footer-time">{{item.start}} - {{item.end}}</span></li>
+        {% endfor %}
+      </ul>
     </div>
   </section>
 </div>

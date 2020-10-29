@@ -6,7 +6,15 @@ module.exports = {
     { title: "Q app", path: "/q" },
     { title: "TAs", path: "/tas" },
   ],
-  social: [
+  openingHours: [
+    { day: "Monday", start: "15.00", end: "17.00" },
+    { day: "Wednesday", start: "13.00", end: "15.00" },
+  ],
+  contact: [
+    {
+      title: "info@ioio.mah.se",
+      path: "mailto:info@ioio.mah.se",
+    },
     {
       title: "the ioio Facebook page",
       path: "https://www.facebook.com/ioiomau/",

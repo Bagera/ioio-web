@@ -11,6 +11,8 @@ The ioio lab is the place where IxD students can get help with projects, studies
 
 The teachers assistants are available during the opening hours but most days there will be people in the lab during normal office hours.
 
-### Mondays: 15-17
-
-### Wednesday: 13-15
+<ul class="Home-openingHours">
+  {% for item in settings.openingHours %}
+  <li><span class="Footer-day">{{item.day}}</span> <span class="Footer-time">{{item.start}} - {{item.end}}</span></li>
+  {% endfor %}
+</ul>
