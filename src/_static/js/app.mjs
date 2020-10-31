@@ -1,4 +1,5 @@
 import { makeSubId } from "/js/Utils.mjs";
+import Avatar from "/js/Avatar.mjs";
 
 import State from "/js/State.mjs";
 import DB from "/js/DB.mjs";
@@ -52,9 +53,10 @@ function setAppStateClasses(appState, user) {
 
   const userMenuComp = document.querySelector("user-menu");
   if (userMenuComp && currentUser) {
+    const avatar = new Avatar(currentUser);
     userMenuComp.loggedin = true;
     userMenuComp.name = currentUser.first_name + " " + currentUser.last_name;
-    userMenuComp.avatar = currentUser.avatar;
+    userMenuComp.avatar = avatar.url;
   }
   if (userMenuComp && !currentUser) {
     userMenuComp.loggedin = false;
